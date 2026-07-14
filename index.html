@@ -141,9 +141,29 @@
     }
     .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
     .hero-tag {
-      padding: 8px 12px; border-radius: 999px; font-size: .88rem;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: .88rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
       backdrop-filter: blur(6px);
+      color: #fff;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .hero-tag:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.25);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+    .hero-topic-note {
+      margin-top: 12px;
+      color: rgba(255,255,255,0.68);
+      font-size: .9rem;
     }
     .hero-panel {
       border-radius: 22px; padding: 22px; backdrop-filter: blur(12px);
@@ -573,12 +593,13 @@
           BIM, data standards, digital twins, circular economy and carbon-conscious optimisation.
         </p>
         <div class="hero-tags">
-          <span class="hero-tag">Bridge engineering</span>
-          <span class="hero-tag">BIM & digital twins</span>
-          <span class="hero-tag">Carbon & LCA</span>
-          <span class="hero-tag">Circular economy</span>
-          <span class="hero-tag">Research infrastructure</span>
+          <a class="hero-tag" href="bridge-engineering.html" target="_blank" rel="noopener">Bridge engineering</a>
+          <a class="hero-tag" href="bim-digital-twins.html" target="_blank" rel="noopener">BIM & digital twins</a>
+          <a class="hero-tag" href="carbon-lca.html" target="_blank" rel="noopener">Carbon & LCA</a>
+          <a class="hero-tag" href="circular-economy.html" target="_blank" rel="noopener">Circular economy</a>
+          <a class="hero-tag" href="research-infrastructure.html" target="_blank" rel="noopener">Research infrastructure</a>
         </div>
+        <div class="hero-topic-note">Click a theme to open a dedicated topic page with images, details and downloads.</div>
       </div>
       <div class="hero-panel">
         <div class="label">Current focus</div>

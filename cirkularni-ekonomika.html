@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cirkulární ekonomika | Zdeněk Fulka</title>
+  <style>
+:root {
+  --bg: #edf2f6;
+  --nav: #07121d;
+  --text: #203040;
+  --muted: #65778a;
+  --heading: #102130;
+  --primary: #1e69c8;
+  --accent: #f36d21;
+  --green: #16864a;
+  --line: rgba(16,33,48,0.10);
+  --card: rgba(255,255,255,0.92);
+  --shadow: 0 18px 46px rgba(8,22,36,0.12);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(30,105,200,0.14), transparent 28%),
+    radial-gradient(circle at 88% 10%, rgba(37,191,212,0.12), transparent 24%),
+    linear-gradient(180deg, #e2eaf1 0, #f3f6f8 260px, #eef2f5 100%);
+  line-height: 1.68;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.top {
+  color: #fff;
+  background:
+    linear-gradient(120deg, rgba(7,18,29,0.96), rgba(23,50,77,0.90)),
+    repeating-linear-gradient(112deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 16px);
+}
+.top-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 24px 40px;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 34px;
+}
+.brand { font-weight: 800; font-size: 1.25rem; color: #fff; }
+.back { color: rgba(255,255,255,0.84); font-weight: 700; }
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 800;
+  color: rgba(255,255,255,0.68);
+  font-size: .82rem;
+}
+h1 {
+  margin: 10px 0 14px;
+  font-size: clamp(2.3rem, 5vw, 4.6rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+.subtitle {
+  max-width: 880px;
+  color: rgba(255,255,255,0.86);
+  font-size: 1.15rem;
+}
+.wrap {
+  max-width: 1180px;
+  margin: -28px auto 0;
+  padding: 0 24px 56px;
+}
+.hero-card {
+  overflow: hidden;
+  border-radius: 28px;
+  background: #fff;
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: var(--shadow);
+}
+.hero-card img {
+  width: 100%;
+  height: 430px;
+  object-fit: cover;
+  display: block;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1.12fr .88fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: var(--shadow);
+  border-radius: 24px;
+  padding: 28px;
+}
+h2 {
+  margin: 0 0 14px;
+  color: var(--heading);
+  font-size: 1.55rem;
+  letter-spacing: -.02em;
+}
+h3 { margin: 18px 0 8px; color: var(--heading); }
+ul { margin: 10px 0 0; padding-left: 22px; }
+li { margin: 6px 0; }
+.pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #213044, #344559);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-size: .9rem;
+  font-weight: 700;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.gallery figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.gallery img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.gallery figcaption {
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+.downloads {
+  display: grid;
+  gap: 10px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-weight: 800;
+  border: 1px solid rgba(30,105,200,0.14);
+  background: rgba(30,105,200,0.10);
+}
+.btn.primary {
+  background: linear-gradient(135deg, var(--primary), #25bfd4);
+  color: #fff;
+  border: 0;
+}
+.note {
+  color: var(--muted);
+  font-size: .94rem;
+}
+.footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 42px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .hero-card img { height: 280px; }
+  .nav { align-items: flex-start; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="nav">
+        <a class="brand" href="cs.html">Zdeněk Fulka</a>
+        <div>
+          <a class="back" href="cs.html">← Zpět na hlavní stránku</a>
+          <span style="color:rgba(255,255,255,.35); padding:0 10px;">|</span>
+          <a class="back" href="circular-economy.html">🇬🇧 English</a>
+        </div>
+      </div>
+      <div class="kicker">Materiálové toky · prevence odpadu · dlouhodobá životnost aktiv</div>
+      <h1>Cirkulární ekonomika</h1>
+      <p class="subtitle">Cirkulární ekonomika v infrastruktuře není slogan. Jde o spolehlivé informace o materiálech, prevenci odpadu, potenciál opětovného použití, plánování údržby a rozhodování v celém životním cyklu aktiva.</p>
+      <div class="pills"><span class="pill">Materiálové toky</span>
+<span class="pill">Snižování CDW</span>
+<span class="pill">Potenciál opětovného použití</span>
+<span class="pill">Dlouhá životnost</span>
+<span class="pill">Renovační mindset</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero-card">
+      <img src="assets/carbon-delivery-concept.png" alt="Cirkulární ekonomika a zelená infrastruktura">
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Co zde řeším</h2>
+        <h3>Téma dizertační práce</h3>
+<p>Moje doktorské téma se zaměřuje na BIM pro cirkulární ekonomiku a predikci materiálových toků s hodnocením uhlíkové stopy dopravních staveb.</p>
+<h3>Materiálové toky</h3>
+<p>Pracuji s vazbou mezi modelovými daty, materiálovými výměrami, predikcí stavebního a demoličního odpadu a strategiemi opětovného využití nebo recyklace.</p>
+<h3>Osobní inženýrský přístup</h3>
+<p>Můj praktický pohled formují i technické koníčky, například renovace klasického Triumphu Spitfire Mk3: udržet aktivum funkční, opravitelné a smysluplné po dlouhou dobu je velmi konkrétní forma cirkulárního uvažování.</p>
+      </section>
+
+      <aside class="card">
+        <h2>Dokumenty ke stažení</h2>
+        <div class="downloads"><a class="btn primary" href="podpora-verejnych-zadavatelu.pdf" target="_blank" rel="noopener">Stáhnout nabídku pro veřejné zadavatele</a>
+<a class="btn" href="buildingsmart-foundation-basic-zdenek-fulka.pdf" target="_blank" rel="noopener">Stáhnout certifikaci buildingSMART</a></div>
+        <p class="note">Odkazy se otevírají v novém okně. Dokumenty jsou součástí repozitáře GitHub Pages.</p>
+      </aside>
+    </div>
+
+    <section class="card" style="margin-top:22px;">
+      <h2>Obrázky a související materiály</h2>
+      <div class="gallery"><figure><img src="assets/triumph-spitfire-restoration.jpg" alt="Renovace Triumph Spitfire"><figcaption>Osobní příklad přístupu k dlouhé životnosti aktiv a opravitelnosti.</figcaption></figure>
+<figure><img src="assets/carbon-delivery-concept.png" alt="Cirkulární ekonomika"><figcaption>Symbolika cirkulární ekonomiky propojená s mostní infrastrukturou.</figcaption></figure></div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 Zdeněk Fulka · tematická stránka osobního webu.</footer>
+</body>
+</html>

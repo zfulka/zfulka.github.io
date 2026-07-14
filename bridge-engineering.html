@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bridge engineering | Zdeněk Fulka</title>
+  <style>
+:root {
+  --bg: #edf2f6;
+  --nav: #07121d;
+  --text: #203040;
+  --muted: #65778a;
+  --heading: #102130;
+  --primary: #1e69c8;
+  --accent: #f36d21;
+  --green: #16864a;
+  --line: rgba(16,33,48,0.10);
+  --card: rgba(255,255,255,0.92);
+  --shadow: 0 18px 46px rgba(8,22,36,0.12);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(30,105,200,0.14), transparent 28%),
+    radial-gradient(circle at 88% 10%, rgba(37,191,212,0.12), transparent 24%),
+    linear-gradient(180deg, #e2eaf1 0, #f3f6f8 260px, #eef2f5 100%);
+  line-height: 1.68;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.top {
+  color: #fff;
+  background:
+    linear-gradient(120deg, rgba(7,18,29,0.96), rgba(23,50,77,0.90)),
+    repeating-linear-gradient(112deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 16px);
+}
+.top-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 24px 40px;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 34px;
+}
+.brand { font-weight: 800; font-size: 1.25rem; color: #fff; }
+.back { color: rgba(255,255,255,0.84); font-weight: 700; }
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 800;
+  color: rgba(255,255,255,0.68);
+  font-size: .82rem;
+}
+h1 {
+  margin: 10px 0 14px;
+  font-size: clamp(2.3rem, 5vw, 4.6rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+.subtitle {
+  max-width: 880px;
+  color: rgba(255,255,255,0.86);
+  font-size: 1.15rem;
+}
+.wrap {
+  max-width: 1180px;
+  margin: -28px auto 0;
+  padding: 0 24px 56px;
+}
+.hero-card {
+  overflow: hidden;
+  border-radius: 28px;
+  background: #fff;
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: var(--shadow);
+}
+.hero-card img {
+  width: 100%;
+  height: 430px;
+  object-fit: cover;
+  display: block;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1.12fr .88fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: var(--shadow);
+  border-radius: 24px;
+  padding: 28px;
+}
+h2 {
+  margin: 0 0 14px;
+  color: var(--heading);
+  font-size: 1.55rem;
+  letter-spacing: -.02em;
+}
+h3 { margin: 18px 0 8px; color: var(--heading); }
+ul { margin: 10px 0 0; padding-left: 22px; }
+li { margin: 6px 0; }
+.pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #213044, #344559);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-size: .9rem;
+  font-weight: 700;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.gallery figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.gallery img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.gallery figcaption {
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+.downloads {
+  display: grid;
+  gap: 10px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-weight: 800;
+  border: 1px solid rgba(30,105,200,0.14);
+  background: rgba(30,105,200,0.10);
+}
+.btn.primary {
+  background: linear-gradient(135deg, var(--primary), #25bfd4);
+  color: #fff;
+  border: 0;
+}
+.note {
+  color: var(--muted);
+  font-size: .94rem;
+}
+.footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 42px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .hero-card img { height: 280px; }
+  .nav { align-items: flex-start; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="nav">
+        <a class="brand" href="index.html">Zdeněk Fulka</a>
+        <div>
+          <a class="back" href="index.html">← Back to homepage</a>
+          <span style="color:rgba(255,255,255,.35); padding:0 10px;">|</span>
+          <a class="back" href="mostni-inzenyrstvi.html">🇨🇿 Česky</a>
+        </div>
+      </div>
+      <div class="kicker">Authorised inspections · design thinking · asset care</div>
+      <h1>Bridge engineering</h1>
+      <p class="subtitle">Bridge engineering is the technical foundation of my work: design, inspection, condition assessment, maintenance planning and practical support for road-bridge owners.</p>
+      <div class="pills"><span class="pill">Bridge inspection</span>
+<span class="pill">ČSN 73 6221</span>
+<span class="pill">Maintenance planning</span>
+<span class="pill">Drone reconnaissance</span>
+<span class="pill">Public owners</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero-card">
+      <img src="assets/data-standards-concept.png" alt="Bridge and data standards visual">
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>What I work on</h2>
+        <h3>Authorised bridge inspections</h3>
+<p>I provide authorised inspections of road-bridge objects, including visual examination, defect documentation, condition assessment, recommendations for maintenance or further diagnostics and formal reporting for owners and administrators.</p>
+<h3>Municipal bridge agenda</h3>
+<p>For public owners I can support the complete agenda of bridges, footbridges and culverts: evidence, bridge sheets, inspection intervals, maintenance manuals, budget planning and preparation of repair packages.</p>
+<h3>Drone reconnaissance</h3>
+<p>Where appropriate, I use a light drone for preliminary reconnaissance and safer visual overview of less accessible parts before detailed inspection.</p>
+      </section>
+
+      <aside class="card">
+        <h2>Downloads</h2>
+        <div class="downloads"><a class="btn primary" href="bridge-inspection-authorisation-173-2015.pdf" target="_blank" rel="noopener">Download bridge inspection authorisation</a>
+<a class="btn" href="podpora-verejnych-zadavatelu.pdf" target="_blank" rel="noopener">Download public procurers offer</a>
+<a class="btn" href="nabidka-pro-mesta-puvodni.pdf" target="_blank" rel="noopener">Original offer for municipalities</a></div>
+        <p class="note">Links open in a new window. Documents are part of the GitHub Pages repository.</p>
+      </aside>
+    </div>
+
+    <section class="card" style="margin-top:22px;">
+      <h2>Images and related material</h2>
+      <div class="gallery"><figure><img src="assets/data-standards-concept.png" alt="Bridge with data overlays"><figcaption>Infrastructure data and bridge-related digital workflows.</figcaption></figure>
+<figure><img src="assets/carbon-delivery-concept.png" alt="Green bridge and carbon reduction visual"><figcaption>Bridge assets as part of long-life, lower-carbon infrastructure.</figcaption></figure></div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 Zdeněk Fulka · topic page of the personal website.</footer>
+</body>
+</html>

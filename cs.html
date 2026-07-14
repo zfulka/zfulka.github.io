@@ -141,9 +141,29 @@
     }
     .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
     .hero-tag {
-      padding: 8px 12px; border-radius: 999px; font-size: .88rem;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: .88rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
       backdrop-filter: blur(6px);
+      color: #fff;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .hero-tag:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.25);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+    .hero-topic-note {
+      margin-top: 12px;
+      color: rgba(255,255,255,0.68);
+      font-size: .9rem;
     }
     .hero-panel {
       border-radius: 22px; padding: 22px; backdrop-filter: blur(12px);
@@ -573,12 +593,13 @@
           BIM, datových standardech, digitálních dvojčatech, cirkulární ekonomice a optimalizaci uhlíkové stopy.
         </p>
         <div class="hero-tags">
-          <span class="hero-tag">Mostní inženýrství</span>
-          <span class="hero-tag">BIM a digitální dvojčata</span>
-          <span class="hero-tag">Uhlík a LCA</span>
-          <span class="hero-tag">Cirkulární ekonomika</span>
-          <span class="hero-tag">Výzkumná infrastruktura</span>
+          <a class="hero-tag" href="mostni-inzenyrstvi.html" target="_blank" rel="noopener">Mostní inženýrství</a>
+          <a class="hero-tag" href="bim-digitalni-dvojcata.html" target="_blank" rel="noopener">BIM a digitální dvojčata</a>
+          <a class="hero-tag" href="uhlik-lca.html" target="_blank" rel="noopener">Uhlík a LCA</a>
+          <a class="hero-tag" href="cirkularni-ekonomika.html" target="_blank" rel="noopener">Cirkulární ekonomika</a>
+          <a class="hero-tag" href="vyzkumna-infrastruktura.html" target="_blank" rel="noopener">Výzkumná infrastruktura</a>
         </div>
+        <div class="hero-topic-note">Kliknutím na oblast otevřeš samostatnou tematickou stránku s obrázky, detaily a dokumenty ke stažení.</div>
       </div>
       <div class="hero-panel">
         <div class="label">Aktuální zaměření</div>
