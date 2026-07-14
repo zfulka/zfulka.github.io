@@ -56,7 +56,7 @@
       max-width: var(--max); margin: 0 auto; min-height: 72px; padding: 0 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 20px;
     }
-    .brand { color: #fff; font-weight: 800; letter-spacing: .02em; font-size: 1.04rem; }
+    .brand { color: #fff; font-weight: 800; letter-spacing: .02em; font-size: 1.38rem; }
     .brand span { color: var(--accent); }
     .nav-links { display: flex; flex-wrap: wrap; gap: 20px; }
     .nav-links a { color: rgba(255,255,255,0.88); font-size: .95rem; font-weight: 500; }
@@ -143,10 +143,38 @@
     .profile-frame img {
       width: 100%; height: 100%; object-fit: cover; border-radius: 26px; background: #d8e1ea;
     }
-    .sidebar h2 { margin: 0; font-size: 1.95rem; line-height: 1.08; color: var(--heading); }
+    .sidebar h2 { margin: 0; font-size: 2.55rem; line-height: 1.02; color: var(--heading); letter-spacing: -0.035em; }
     .role { margin-top: 10px; color: var(--primary); font-weight: 800; }
     .location { margin-top: 8px; color: var(--muted); font-size: .96rem; }
     .summary { margin-top: 14px; color: var(--muted); font-size: .95rem; }
+    .business-summary {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--text);
+    }
+    .business-summary strong { color: var(--heading); }
+    .detail-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+    }
+    .detail-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 14px;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+    }
+    .detail-row:first-child { border-top: 0; }
+    .detail-label {
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .detail-value {
+      color: var(--text);
+      font-weight: 500;
+    }
     .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -185,9 +213,101 @@
 
     .chips { display: flex; flex-wrap: wrap; gap: 10px; }
     .chip {
-      padding: 8px 12px; border-radius: 999px; font-size: .9rem; font-weight: 600;
+      cursor: pointer;
+      appearance: none;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: .95rem;
+      font-weight: 700;
       background: linear-gradient(180deg, rgba(30,105,200,0.12), rgba(37,191,212,0.1));
-      color: #224d73; border: 1px solid rgba(30,105,200,0.12);
+      color: #224d73;
+      border: 1px solid rgba(30,105,200,0.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.76), 0 6px 16px rgba(19,65,108,0.06);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+    }
+    .chip:hover {
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 12px 22px rgba(19,65,108,0.12);
+      background: linear-gradient(180deg, rgba(30,105,200,0.18), rgba(37,191,212,0.16));
+    }
+    .chip:focus-visible {
+      outline: 3px solid rgba(243,109,33,0.38);
+      outline-offset: 3px;
+    }
+    .chip.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), #25bfd4);
+      border-color: rgba(255,255,255,0.36);
+      box-shadow: 0 14px 28px rgba(30,105,200,0.22);
+    }
+    .expertise-detail {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: stretch;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(249,252,255,0.9)),
+        radial-gradient(circle at 10% 10%, rgba(30,105,200,0.10), transparent 34%);
+      border: 1px solid rgba(16,33,48,0.06);
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 260px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.86);
+    }
+    .expertise-copy {
+      display: grid;
+      align-content: center;
+      gap: 12px;
+    }
+    .expertise-copy h4 {
+      margin: 0;
+      color: var(--heading);
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+    .expertise-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .expertise-copy ul {
+      margin: 4px 0 0;
+      padding-left: 20px;
+      color: var(--text);
+    }
+    .expertise-copy li { margin: 4px 0; }
+    .expertise-visual {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 24% 18%, rgba(243,109,33,0.20), transparent 22%),
+        radial-gradient(circle at 72% 70%, rgba(37,191,212,0.22), transparent 24%),
+        linear-gradient(135deg, #07121d, #17324d);
+      color: #fff;
+      position: relative;
+    }
+    .expertise-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(120deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
+      opacity: .55;
+    }
+    .expertise-visual svg {
+      position: relative;
+      z-index: 1;
+      width: min(92%, 300px);
+      height: auto;
+      filter: drop-shadow(0 16px 24px rgba(0,0,0,0.28));
+    }
+    .expertise-hint {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: .92rem;
     }
 
     .grid-2, .grid-3 { display: grid; gap: 16px; }
@@ -228,10 +348,15 @@
       .sidebar-top { padding: 24px; }
       .side-list { padding: 16px 16px 20px; }
       .grid-2, .grid-3, .stats { grid-template-columns: 1fr; }
+      .expertise-detail { grid-template-columns: 1fr; padding: 18px; }
+      .expertise-visual { min-height: 180px; }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+      .detail-row { grid-template-columns: 1fr; gap: 4px; }
       .hero-inner { padding-top: 56px; padding-bottom: 70px; }
       .hero h1 { font-size: 2.35rem; }
       .profile-frame { width: 150px; height: 150px; }
+      .brand { font-size: 1.18rem; }
+      .sidebar h2 { font-size: 2.25rem; }
     }
   </style>
 </head>
@@ -292,6 +417,13 @@
             Project manager, digital infrastructure engineer and researcher focused on standardisation,
             digitalisation, circular economy and sustainable asset delivery.
           </div>
+
+          <div class="summary business-summary">
+            <strong>Ing. Zdeněk Fulka</strong><br>
+            Malá 543, Liberec, 463 12<br>
+            <a href="tel:+420722659255">+420 722 659 255</a><br>
+            <a href="mailto:fulka@outlook.cz">fulka@outlook.cz</a>
+          </div>
           <div class="cta-row">
             <a class="btn btn-primary" href="1.CV_Fulka_ENG.pdf">Download CV</a>
             <a class="btn btn-secondary" href="mailto:fulka@outlook.cz">Email</a>
@@ -341,19 +473,35 @@
             <h3>Focus areas</h3>
             <div class="mini">Core expertise</div>
           </div>
-          <div class="chips">
-            <span class="chip">Project management</span>
-            <span class="chip">VDC / BIM / digital twins</span>
-            <span class="chip">Graphical & data models</span>
-            <span class="chip">API / IFC / IDS</span>
-            <span class="chip">Bridge engineering</span>
-            <span class="chip">Transport infrastructure</span>
-            <span class="chip">Carbon footprint assessment</span>
-            <span class="chip">Circular economy</span>
-            <span class="chip">Material-flow analysis</span>
-            <span class="chip">DPP</span>
-            <span class="chip">Research infrastructure sustainability</span>
-            <span class="chip">Energy flexibility / PV / wind / BESS</span>
+          <div class="chips" role="tablist" aria-label="Focus areas">
+            <button class="chip active" type="button" data-topic="project" role="tab" aria-selected="true">Project management</button>
+            <button class="chip" type="button" data-topic="bim" role="tab" aria-selected="false">VDC / BIM / digital twins</button>
+            <button class="chip" type="button" data-topic="models" role="tab" aria-selected="false">Graphical & data models</button>
+            <button class="chip" type="button" data-topic="api" role="tab" aria-selected="false">API / IFC / IDS</button>
+            <button class="chip" type="button" data-topic="bridges" role="tab" aria-selected="false">Bridge engineering</button>
+            <button class="chip" type="button" data-topic="transport" role="tab" aria-selected="false">Transport infrastructure</button>
+            <button class="chip" type="button" data-topic="carbon" role="tab" aria-selected="false">Carbon footprint assessment</button>
+            <button class="chip" type="button" data-topic="circular" role="tab" aria-selected="false">Circular economy</button>
+            <button class="chip" type="button" data-topic="material" role="tab" aria-selected="false">Material-flow analysis</button>
+            <button class="chip" type="button" data-topic="dpp" role="tab" aria-selected="false">DPP</button>
+            <button class="chip" type="button" data-topic="research" role="tab" aria-selected="false">Research infrastructure sustainability</button>
+            <button class="chip" type="button" data-topic="energy" role="tab" aria-selected="false">Energy flexibility / PV / wind / BESS</button>
+          </div>
+
+          <div class="expertise-detail" id="expertise-detail" role="tabpanel" aria-live="polite">
+            <div class="expertise-copy">
+              <h4 id="expertise-title">Project management</h4>
+              <p id="expertise-text">
+                I lead multidisciplinary technical and research tasks with responsibility for budget, schedule, quality assurance and risk control. My work connects engineering delivery with digitalisation and sustainability outcomes.
+              </p>
+              <ul id="expertise-bullets">
+                <li>Coordination of design, research and implementation teams.</li>
+                <li>Control of task delivery, risks, milestones and QA/QC.</li>
+                <li>Translation of technical objectives into practical workflows.</li>
+              </ul>
+              <div class="expertise-hint">Click another focus area above to see the related work description.</div>
+            </div>
+            <div class="expertise-visual" id="expertise-visual" aria-hidden="true"></div>
           </div>
         </section>
 
@@ -466,23 +614,50 @@
 
         <section class="card" id="contact">
           <div class="section-head">
-            <h3>Contact</h3>
+            <h3>Contact and business details</h3>
             <div class="mini">Get in touch</div>
           </div>
           <p class="lead">For professional, research or consulting collaboration, feel free to contact me.</p>
+
           <div class="grid-3">
             <article class="tile">
               <h4>Email</h4>
               <p><a href="mailto:fulka@outlook.cz">fulka@outlook.cz</a></p>
             </article>
             <article class="tile">
+              <h4>Phone</h4>
+              <p><a href="tel:+420722659255">+420 722 659 255</a></p>
+            </article>
+            <article class="tile">
               <h4>LinkedIn</h4>
               <p><a href="https://www.linkedin.com/in/zdenek-fulka-3624731ba" target="_blank" rel="noopener">zdenek-fulka-3624731ba</a></p>
             </article>
-            <article class="tile">
-              <h4>GitHub</h4>
-              <p><a href="https://github.com/zfulka" target="_blank" rel="noopener">github.com/zfulka</a></p>
-            </article>
+          </div>
+
+          <div class="tile" style="margin-top:16px;">
+            <h4>Business and billing details</h4>
+            <div class="detail-list">
+              <div class="detail-row">
+                <div class="detail-label">Name</div>
+                <div class="detail-value">Ing. Zdeněk Fulka</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Address</div>
+                <div class="detail-value">Malá 543, Liberec, 463 12, Czech Republic</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">IČO</div>
+                <div class="detail-value">14324172</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Bank account</div>
+                <div class="detail-value">103467068/2250</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Data box</div>
+                <div class="detail-value">4wxtj7b</div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
@@ -492,5 +667,169 @@
   <footer class="footer">
     © 2026 Zdeněk Fulka · Personal website hosted on GitHub Pages.
   </footer>
+
+  <script>
+    const expertiseData = {
+      project: {
+        title: "Project management",
+        text: "I lead multidisciplinary technical and research tasks with responsibility for budget, schedule, quality assurance and risk control. My work connects engineering delivery with digitalisation and sustainability outcomes.",
+        bullets: [
+          "Coordination of design, research and implementation teams.",
+          "Control of task delivery, risks, milestones and QA/QC.",
+          "Translation of technical objectives into practical workflows."
+        ],
+        visual: "timeline"
+      },
+      bim: {
+        title: "VDC / BIM / digital twins",
+        text: "I develop and coordinate BIM workflows that connect graphical models, structured data, CDE environments and asset-management needs. The goal is not modelling for its own sake, but better decisions across the infrastructure life cycle.",
+        bullets: [
+          "BEPs, CDE workflows and BIM coordination.",
+          "Digital twins and structured asset information.",
+          "Implementation of BIM in design preparation and delivery."
+        ],
+        visual: "digitalTwin"
+      },
+      models: {
+        title: "Graphical & data models",
+        text: "I work with the link between geometry, classification, information requirements and structured datasets. This includes using model data for quantities, material flows, environmental assessment and downstream automation.",
+        bullets: [
+          "Model-based quantities and structured asset attributes.",
+          "Graphical-to-data model consistency checks.",
+          "Preparation of data suitable for automation and analytics."
+        ],
+        visual: "models"
+      },
+      api: {
+        title: "API / IFC / IDS integration",
+        text: "I focus on interoperability: IFC, IDS, APIs and data-exchange workflows that allow information to move between BIM tools, databases and analytical applications without manual rework.",
+        bullets: [
+          "IFC-based information exchange and validation logic.",
+          "IDS and information-requirement driven workflows.",
+          "API-based process integration and automation."
+        ],
+        visual: "api"
+      },
+      bridges: {
+        title: "Bridge engineering",
+        text: "My background is bridge design, modelling, inspection and technical coordination. This engineering base helps me keep BIM and sustainability workflows grounded in real infrastructure delivery.",
+        bullets: [
+          "Bridge design and multidisciplinary coordination.",
+          "Bridge inspection and technical assessment.",
+          "Digital records for structures and asset owners."
+        ],
+        visual: "bridge"
+      },
+      transport: {
+        title: "Transport infrastructure",
+        text: "I apply digitalisation and sustainability methods to road and transport-infrastructure environments, including design preparation, data standards, procurement requirements and asset information management.",
+        bullets: [
+          "Transport-infrastructure BIM requirements.",
+          "Design preparation and owner information needs.",
+          "Digital delivery standards for public infrastructure."
+        ],
+        visual: "transport"
+      },
+      carbon: {
+        title: "Carbon footprint assessment",
+        text: "I connect design decisions, material quantities and lifecycle thinking with carbon-footprint assessment. The aim is to identify where engineering choices can reduce emissions without losing technical performance.",
+        bullets: [
+          "CO₂ assessment from material and quantity data.",
+          "Scope 3 and infrastructure carbon-tracking workflows.",
+          "Linking design optimisation with carbon and cost reduction."
+        ],
+        visual: "carbon"
+      },
+      circular: {
+        title: "Circular economy",
+        text: "I work on practical circular-economy applications in construction and infrastructure: reducing waste, improving material efficiency and preparing digital information for reuse, recycling and recovery decisions.",
+        bullets: [
+          "Circular economy principles for infrastructure assets.",
+          "Construction and demolition waste mitigation.",
+          "Information support for reuse and recovery potential."
+        ],
+        visual: "circular"
+      },
+      material: {
+        title: "Material-flow analysis",
+        text: "I use BIM-based and data-driven methods to understand material flows across the asset life cycle. This supports waste prediction, recovery planning and comparison of design alternatives.",
+        bullets: [
+          "Material quantities and flow mapping.",
+          "Prediction of future construction and demolition waste.",
+          "Data structures for circular material management."
+        ],
+        visual: "material"
+      },
+      dpp: {
+        title: "Digital Product Passport",
+        text: "I work with DPP-related thinking for construction products and assets, including GTIN-based information transfer, product identification and the link between BIM elements and physical products.",
+        bullets: [
+          "GTIN-based methodology and product identification.",
+          "BIM-to-product information transfer.",
+          "Support for traceability and circular-economy datasets."
+        ],
+        visual: "passport"
+      },
+      research: {
+        title: "Research infrastructure sustainability",
+        text: "Within research infrastructure projects, I focus on the interface between facility operation, energy demand, asset data, sustainability assessment and digital decision-support tools.",
+        bullets: [
+          "Sustainability methods for large research facilities.",
+          "Digital tools supporting facility and asset decisions.",
+          "Coordination between research tasks and practical implementation."
+        ],
+        visual: "research"
+      },
+      energy: {
+        title: "Energy flexibility / PV / wind / BESS",
+        text: "I work on digital decision-support methods for energy-chain optimisation, renewable generation estimation and battery-storage planning under climate-change projection scenarios.",
+        bullets: [
+          "PV and wind generation estimation under climate projections.",
+          "Battery storage and energy-flexibility assessment.",
+          "Cost and carbon optimisation for big-science facilities."
+        ],
+        visual: "energy"
+      }
+    };
+
+    function expertiseSvg(type) {
+      const common = 'viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg"';
+      const base = {
+        timeline: `<svg ${common}><rect x="32" y="34" width="256" height="152" rx="18" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.28)"/><path d="M78 62v96" stroke="#25bfd4" stroke-width="5" stroke-linecap="round"/><circle cx="78" cy="70" r="12" fill="#f36d21"/><circle cx="78" cy="110" r="12" fill="#25bfd4"/><circle cx="78" cy="150" r="12" fill="#7fb4ff"/><path d="M110 70h116M110 110h86M110 150h132" stroke="white" stroke-opacity=".8" stroke-width="8" stroke-linecap="round"/></svg>`,
+        digitalTwin: `<svg ${common}><circle cx="160" cy="110" r="68" fill="rgba(37,191,212,.14)" stroke="#25bfd4" stroke-width="3"/><path d="M160 46v128M96 110h128M116 66l88 88M204 66l-88 88" stroke="rgba(255,255,255,.55)" stroke-width="2"/><rect x="124" y="74" width="72" height="72" rx="12" fill="rgba(255,255,255,.18)" stroke="white" stroke-opacity=".7"/><path d="M142 110l14 14 28-34" stroke="#f36d21" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        models: `<svg ${common}><rect x="54" y="48" width="92" height="78" rx="12" fill="rgba(255,255,255,.18)" stroke="#7fb4ff"/><rect x="174" y="82" width="92" height="88" rx="12" fill="rgba(255,255,255,.12)" stroke="#25bfd4"/><path d="M146 88h28M146 112h28M94 126v38h80" stroke="#f36d21" stroke-width="5" stroke-linecap="round"/><circle cx="94" cy="88" r="15" fill="#f36d21"/><circle cx="220" cy="126" r="18" fill="#25bfd4"/></svg>`,
+        api: `<svg ${common}><rect x="34" y="80" width="92" height="64" rx="14" fill="rgba(255,255,255,.16)" stroke="#7fb4ff"/><rect x="194" y="80" width="92" height="64" rx="14" fill="rgba(255,255,255,.16)" stroke="#25bfd4"/><path d="M128 112h64" stroke="#f36d21" stroke-width="7" stroke-linecap="round"/><path d="M172 92l20 20-20 20" stroke="#f36d21" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="120" text-anchor="middle" fill="white" font-size="20" font-weight="700">IFC</text><text x="240" y="120" text-anchor="middle" fill="white" font-size="20" font-weight="700">IDS</text></svg>`,
+        bridge: `<svg ${common}><path d="M40 154h240" stroke="white" stroke-opacity=".75" stroke-width="10" stroke-linecap="round"/><path d="M74 154c22-58 51-86 86-86s64 28 86 86" stroke="#25bfd4" stroke-width="8" stroke-linecap="round"/><path d="M92 154V98M128 154V78M192 154V78M228 154V98" stroke="#f36d21" stroke-width="5" stroke-linecap="round"/></svg>`,
+        transport: `<svg ${common}><path d="M42 158c50-58 107-87 170-87 28 0 49 5 66 14" stroke="rgba(255,255,255,.45)" stroke-width="16" stroke-linecap="round"/><path d="M42 158c50-58 107-87 170-87 28 0 49 5 66 14" stroke="#7fb4ff" stroke-width="6" stroke-linecap="round"/><path d="M82 156h178" stroke="#f36d21" stroke-width="5" stroke-dasharray="16 12" stroke-linecap="round"/><rect x="94" y="74" width="52" height="36" rx="8" fill="rgba(255,255,255,.18)" stroke="#25bfd4"/></svg>`,
+        carbon: `<svg ${common}><circle cx="126" cy="112" r="56" fill="rgba(37,191,212,.15)" stroke="#25bfd4" stroke-width="4"/><path d="M101 116c10 20 39 22 53 3 12-17 2-43-22-45-24-2-42 23-31 42z" fill="rgba(255,255,255,.18)" stroke="white" stroke-opacity=".65"/><path d="M192 148l40-78 40 78h-80z" fill="rgba(243,109,33,.72)"/><text x="232" y="137" text-anchor="middle" fill="white" font-size="28" font-weight="800">CO₂</text></svg>`,
+        circular: `<svg ${common}><path d="M102 72c34-28 82-27 116 1" stroke="#25bfd4" stroke-width="10" stroke-linecap="round"/><path d="M219 73l-2-32 31 10" stroke="#25bfd4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M218 148c-34 28-82 27-116-1" stroke="#f36d21" stroke-width="10" stroke-linecap="round"/><path d="M101 147l2 32-31-10" stroke="#f36d21" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="160" cy="110" r="34" fill="rgba(255,255,255,.16)" stroke="white" stroke-opacity=".65"/></svg>`,
+        material: `<svg ${common}><rect x="52" y="54" width="58" height="58" rx="12" fill="rgba(243,109,33,.78)"/><rect x="132" y="82" width="58" height="58" rx="12" fill="rgba(37,191,212,.76)"/><rect x="212" y="110" width="58" height="58" rx="12" fill="rgba(127,180,255,.76)"/><path d="M110 84h22M190 112h22" stroke="white" stroke-width="7" stroke-linecap="round"/><path d="M120 158c32 22 78 24 120 2" stroke="white" stroke-opacity=".58" stroke-width="5" stroke-linecap="round"/></svg>`,
+        passport: `<svg ${common}><rect x="98" y="42" width="124" height="150" rx="16" fill="rgba(255,255,255,.16)" stroke="#7fb4ff"/><path d="M124 82h72M124 112h72M124 142h46" stroke="white" stroke-opacity=".72" stroke-width="7" stroke-linecap="round"/><rect x="124" y="154" width="72" height="20" rx="4" fill="#f36d21"/><circle cx="200" cy="64" r="20" fill="#25bfd4"/><path d="M190 64l7 7 14-18" stroke="#07121d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        research: `<svg ${common}><rect x="52" y="132" width="216" height="38" rx="10" fill="rgba(255,255,255,.16)" stroke="white" stroke-opacity=".5"/><path d="M86 132V82M126 132V58M166 132V86M206 132V68M246 132V92" stroke="#25bfd4" stroke-width="8" stroke-linecap="round"/><path d="M76 78h72M154 58h70M194 92h64" stroke="#f36d21" stroke-width="5" stroke-linecap="round"/><circle cx="126" cy="58" r="11" fill="#f36d21"/><circle cx="206" cy="68" r="11" fill="#7fb4ff"/></svg>`,
+        energy: `<svg ${common}><path d="M70 164h180" stroke="white" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/><path d="M96 150l38-88 34 88M168 150l32-70 34 70" stroke="#25bfd4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M98 70h56M188 88h56" stroke="#f36d21" stroke-width="5" stroke-linecap="round"/><circle cx="238" cy="54" r="22" fill="#f36d21"/><path d="M72 100h30l-18 28h28l-40 48 14-38H60l12-38z" fill="rgba(255,255,255,.86)"/></svg>`
+      };
+      return base[type] || base.timeline;
+    }
+
+    function updateExpertise(topic) {
+      const data = expertiseData[topic];
+      if (!data) return;
+      document.querySelectorAll('.chip[data-topic]').forEach(button => {
+        const isActive = button.dataset.topic === topic;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+      document.getElementById('expertise-title').textContent = data.title;
+      document.getElementById('expertise-text').textContent = data.text;
+      document.getElementById('expertise-bullets').innerHTML = data.bullets.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('expertise-visual').innerHTML = expertiseSvg(data.visual);
+    }
+
+    document.querySelectorAll('.chip[data-topic]').forEach(button => {
+      button.addEventListener('click', () => updateExpertise(button.dataset.topic));
+    });
+    updateExpertise('project');
+  </script>
+
 </body>
 </html>

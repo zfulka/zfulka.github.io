@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" fill="none">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="640" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#17324D"/>
-      <stop offset="0.55" stop-color="#275E8A"/>
-      <stop offset="1" stop-color="#F36D21"/>
-    </linearGradient>
-  </defs>
-  <rect width="640" height="640" rx="48" fill="url(#bg)"/>
-  <circle cx="320" cy="230" r="110" fill="rgba(255,255,255,0.88)"/>
-  <path d="M148 529c22-94 95-149 172-149 77 0 150 55 172 149" fill="rgba(255,255,255,0.88)"/>
-  <text x="50%" y="590" text-anchor="middle" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Upload your profile photo as assets/profile.jpg</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><rect width="640" height="640" fill="#d8e1ea"/><text x="50%" y="50%" text-anchor="middle" font-family="Arial" font-size="32" fill="#233445">Profile photo</text></svg>
