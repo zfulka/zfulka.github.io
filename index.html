@@ -320,6 +320,132 @@
     .tile h4 { margin: 0 0 8px; font-size: 1.04rem; color: var(--heading); }
     .tile p { margin: 0; color: var(--muted); font-size: .97rem; }
 
+    .project-card {
+      cursor: pointer;
+      overflow: hidden;
+      padding: 0;
+      text-align: left;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(8,22,36,0.12);
+      border-color: rgba(30,105,200,0.18);
+    }
+    .project-card.active {
+      border-color: rgba(243,109,33,0.42);
+      box-shadow: 0 18px 36px rgba(243,109,33,0.12);
+    }
+    .project-image {
+      height: 142px;
+      background:
+        linear-gradient(135deg, rgba(7,18,29,0.74), rgba(7,18,29,0.18)),
+        var(--project-image) center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      color: #fff;
+      position: relative;
+    }
+    .project-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(7,18,29,0.58));
+      pointer-events: none;
+    }
+    .project-badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(8px);
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .project-card-body { padding: 20px 22px 22px; }
+    .project-card h4 { margin: 0 0 8px; color: var(--heading); }
+    .project-card p { margin: 0; color: var(--muted); font-size: .97rem; }
+    .project-card button {
+      all: unset;
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    .project-detail {
+      margin-top: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(16,33,48,0.07);
+      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,251,254,0.9));
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.88);
+    }
+    .project-detail-image {
+      min-height: 330px;
+      background:
+        linear-gradient(135deg, rgba(7,18,29,0.78), rgba(7,18,29,0.16)),
+        var(--project-detail-image) center/cover no-repeat;
+      position: relative;
+    }
+    .project-detail-logo {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      max-width: 72%;
+      max-height: 68px;
+      object-fit: contain;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+    .project-detail-copy {
+      padding: 28px;
+      display: grid;
+      align-content: center;
+      gap: 12px;
+    }
+    .project-detail-copy h4 {
+      margin: 0;
+      color: var(--heading);
+      font-size: 1.55rem;
+      letter-spacing: -0.02em;
+    }
+    .project-detail-copy p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .project-detail-copy ul {
+      margin: 4px 0 0;
+      padding-left: 20px;
+      color: var(--text);
+    }
+    .project-detail-copy li { margin: 4px 0; }
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .project-links a {
+      display: inline-flex;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      font-weight: 700;
+      font-size: .92rem;
+    }
+
     .timeline { display: grid; gap: 0; }
     .timeline-item {
       display: grid; grid-template-columns: 160px 1fr; gap: 18px;
@@ -350,6 +476,9 @@
       .grid-2, .grid-3, .stats { grid-template-columns: 1fr; }
       .expertise-detail { grid-template-columns: 1fr; padding: 18px; }
       .expertise-visual { min-height: 180px; }
+      .project-detail { grid-template-columns: 1fr; }
+      .project-detail-image { min-height: 230px; }
+      .project-image { height: 128px; }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .detail-row { grid-template-columns: 1fr; gap: 4px; }
       .hero-inner { padding-top: 56px; padding-bottom: 70px; }
@@ -510,23 +639,73 @@
             <h3>Selected projects and themes</h3>
             <div class="mini">Key work</div>
           </div>
-          <div class="grid-2">
-            <article class="tile">
-              <h4>FlexRICAN</h4>
-              <p>Energy chain optimisation, wind-power generation tool development and photovoltaic efficiency estimation under climate-change projection models for cost / carbon reducing operation of research infrastructures.</p>
+
+          <div class="grid-2" role="tablist" aria-label="Selected projects">
+            <article class="tile project-card active" data-project="flexrican" style="--project-image: url('https://flexrican.eu/wp-content/uploads/2024/10/IMG_6034-1024x768.jpg');">
+              <button type="button" aria-selected="true">
+                <div class="project-image">
+                  <span class="project-badge">FlexRICAN</span>
+                </div>
+                <div class="project-card-body">
+                  <h4>FlexRICAN</h4>
+                  <p>Energy-chain optimisation, renewables estimation and research-infrastructure flexibility.</p>
+                </div>
+              </button>
             </article>
-            <article class="tile">
-              <h4>RECONMATIC</h4>
-              <p>Implementation of digital tools in demonstration cases, training delivery, sustainability assessments and automated BIM-to-product information transfer based on GTIN methodology.</p>
+
+            <article class="tile project-card" data-project="reconmatic" style="--project-image: url('https://static.wixstatic.com/media/a2313d_a395e9e7686f42d2b9554e0c96147fea~mv2.jpg/v1/crop/x_797%2Cy_0%2Cw_843%2Ch_1093/fill/w_310%2Ch_402%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/DIMS-Cover.jpg');">
+              <button type="button" aria-selected="false">
+                <div class="project-image">
+                  <span class="project-badge">RECONMATIC</span>
+                </div>
+                <div class="project-card-body">
+                  <h4>RECONMATIC</h4>
+                  <p>Digital tools, BIM-to-product information transfer and circular construction waste mitigation.</p>
+                </div>
+              </button>
             </article>
-            <article class="tile">
-              <h4>Transport-infrastructure data standards</h4>
-              <p>Preparation and coordination of internal data standards, EPDs, EIRs and AIRs according to EN ISO 19650, including CDE implementation and process digitalisation.</p>
+
+            <article class="tile project-card" data-project="datastandards" style="--project-image: linear-gradient(135deg, #0c1f33, #275e8a 55%, #25bfd4);">
+              <button type="button" aria-selected="false">
+                <div class="project-image">
+                  <span class="project-badge">Data standards</span>
+                </div>
+                <div class="project-card-body">
+                  <h4>Transport-infrastructure data standards</h4>
+                  <p>EIRs, AIRs, CDE workflows and standardised digital delivery requirements.</p>
+                </div>
+              </button>
             </article>
-            <article class="tile">
-              <h4>Carbon-conscious delivery</h4>
-              <p>Development of digital and process-oriented methods for reducing both emissions and costs in infrastructure and construction workflows.</p>
+
+            <article class="tile project-card" data-project="carbon" style="--project-image: linear-gradient(135deg, #07121d, #17324d 50%, #f36d21);">
+              <button type="button" aria-selected="false">
+                <div class="project-image">
+                  <span class="project-badge">Carbon delivery</span>
+                </div>
+                <div class="project-card-body">
+                  <h4>Carbon-conscious delivery</h4>
+                  <p>Methods linking design, quantities, material choices, carbon and cost reduction.</p>
+                </div>
+              </button>
             </article>
+          </div>
+
+          <div class="project-detail" id="project-detail" aria-live="polite">
+            <div class="project-detail-image" id="project-detail-image">
+              <img class="project-detail-logo" id="project-detail-logo" alt="" />
+            </div>
+            <div class="project-detail-copy">
+              <h4 id="project-title">FlexRICAN</h4>
+              <p id="project-text">
+                Development of digital decision-support methods for research infrastructures, focusing on energy-chain optimisation, energy flexibility, PV and wind generation assessment and carbon/cost reduction.
+              </p>
+              <ul id="project-bullets">
+                <li>Energy-chain optimisation for large research infrastructures.</li>
+                <li>PV and wind generation estimation under climate-change scenarios.</li>
+                <li>Support for energy flexibility, resilience and carbon reduction.</li>
+              </ul>
+              <div class="project-links" id="project-links"></div>
+            </div>
           </div>
         </section>
 
@@ -829,6 +1008,107 @@
       button.addEventListener('click', () => updateExpertise(button.dataset.topic));
     });
     updateExpertise('project');
+  </script>
+
+
+  <script>
+    const projectData = {
+      flexrican: {
+        title: "FlexRICAN",
+        image: "https://flexrican.eu/wp-content/uploads/2024/10/IMG_6034-1024x768.jpg",
+        logo: "https://flexrican.eu/wp-content/uploads/2024/06/Logo-and-disclaimer-banner-2.png",
+        text: "Within FlexRICAN I work on digital decision-support methods for research infrastructures, focused on energy-chain optimisation, energy flexibility, PV and wind generation assessment and carbon/cost reduction.",
+        bullets: [
+          "Energy-chain optimisation and decision-support workflows for large research infrastructures.",
+          "PV efficiency and wind-power estimation under climate-change projection models.",
+          "Contribution to methodologies supporting energy flexibility, resilience and carbon reduction."
+        ],
+        links: [
+          ["FlexRICAN website", "https://flexrican.eu/about-flexrican/"],
+          ["FlexRICAN at ELI / running projects", "https://www.eli-laser.eu/projects/running-projects/"]
+        ]
+      },
+      reconmatic: {
+        title: "RECONMATIC",
+        image: "https://static.wixstatic.com/media/a2313d_a395e9e7686f42d2b9554e0c96147fea~mv2.jpg/v1/crop/x_797%2Cy_0%2Cw_843%2Ch_1093/fill/w_310%2Ch_402%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/DIMS-Cover.jpg",
+        logo: "https://static.wixstatic.com/media/613330_d520e0ee2a0441518051bfd29aa402ae~mv2.png/v1/fill/w_179%2Ch_44%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Full%20Colour_White%20Text.png",
+        text: "Within RECONMATIC I focus on digital tool implementation, BIM-based information transfer and sustainability assessment for construction and demolition waste mitigation.",
+        bullets: [
+          "Implementation of digital tools in demonstration cases and training activities.",
+          "Automation of information transfer from BIM models to physical products using GTIN-based methodology.",
+          "Support for circular construction, waste reduction and material traceability."
+        ],
+        links: [
+          ["RECONMATIC website", "https://www.reconmatic.eu/"],
+          ["CORDIS project record", "https://cordis.europa.eu/project/id/101058580"]
+        ]
+      },
+      datastandards: {
+        title: "Transport-infrastructure data standards",
+        image: "",
+        logo: "",
+        text: "This theme covers preparation and coordination of digital delivery requirements for transport infrastructure, including structured information needs, CDE workflows and EN ISO 19650-aligned documentation.",
+        bullets: [
+          "Preparation of EIRs, AIRs, data standards and CDE-based workflows.",
+          "Translation of owner requirements into practical digital delivery processes.",
+          "Support for internal digitalisation across design preparation and asset-information management."
+        ],
+        links: []
+      },
+      carbon: {
+        title: "Carbon-conscious delivery",
+        image: "",
+        logo: "",
+        text: "This theme connects design decisions, quantities, material choices and lifecycle thinking with carbon/cost reduction in infrastructure and construction workflows.",
+        bullets: [
+          "Assessment of carbon-reduction opportunities from material and quantity data.",
+          "Development of process-oriented workflows for lower-carbon delivery.",
+          "Integration of carbon assessment with BIM, data standards and circular-economy thinking."
+        ],
+        links: []
+      }
+    };
+
+    function updateProject(projectKey) {
+      const data = projectData[projectKey];
+      if (!data) return;
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        const active = card.dataset.project === projectKey;
+        card.classList.toggle('active', active);
+        const button = card.querySelector('button');
+        if (button) button.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      const imagePanel = document.getElementById('project-detail-image');
+      const logo = document.getElementById('project-detail-logo');
+
+      if (data.image) {
+        imagePanel.style.setProperty('--project-detail-image', `url('${data.image}')`);
+      } else {
+        imagePanel.style.setProperty('--project-detail-image', "linear-gradient(135deg, #07121d, #17324d 58%, #25bfd4)");
+      }
+
+      if (data.logo) {
+        logo.src = data.logo;
+        logo.alt = `${data.title} visual identity`;
+        logo.style.display = 'block';
+      } else {
+        logo.removeAttribute('src');
+        logo.alt = "";
+        logo.style.display = 'none';
+      }
+
+      document.getElementById('project-title').textContent = data.title;
+      document.getElementById('project-text').textContent = data.text;
+      document.getElementById('project-bullets').innerHTML = data.bullets.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('project-links').innerHTML = data.links.map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener">${label}</a>`).join('');
+    }
+
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', () => updateProject(card.dataset.project));
+    });
+    updateProject('flexrican');
   </script>
 
 </body>
