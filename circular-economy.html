@@ -83,8 +83,8 @@ h1 {
 }
 .hero-card img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 430px;
+  object-fit: cover;
   display: block;
 }
 .grid {
@@ -178,7 +178,7 @@ li { margin: 6px 0; }
 @media (max-width: 860px) {
   .grid { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr; }
-  .hero-card img { height: auto; }
+  .hero-card img { height: 280px; }
   .nav { align-items: flex-start; flex-direction: column; }
 }
 </style>
@@ -229,6 +229,12 @@ li { margin: 6px 0; }
         <p class="note">Links open in a new window. Documents are part of the GitHub Pages repository.</p>
       </aside>
     </div>
+
+    <section class="card" style="margin-top:22px;">
+      <h2>Images and related material</h2>
+      <div class="gallery"><figure><img src="assets/phd-wasteie-parkhouse.png" alt="WASTEie and BIM material passport for a parkhouse"><figcaption>WASTEie, BIM material passport and future waste estimation applied to a parking-structure type asset.</figcaption></figure>
+<figure><img src="assets/carbon-delivery-concept.png" alt="Circular economy visual"><figcaption>Circular-economy symbolism connected with infrastructure and carbon-conscious delivery.</figcaption></figure></div>
+    </section>
   </main>
 
   <footer class="footer">© 2026 Zdeněk Fulka · topic page of the personal website.</footer>
