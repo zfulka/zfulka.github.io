@@ -81,11 +81,19 @@ h1 {
   border: 1px solid rgba(255,255,255,0.72);
   box-shadow: var(--shadow);
 }
+.hero-card {
+  padding: 18px;
+  background: #fff;
+}
+
 .hero-card img {
   width: 100%;
-  height: 430px;
-  object-fit: cover;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
   display: block;
+  border-radius: 18px;
+  background: #fff;
 }
 .grid {
   display: grid;
@@ -178,7 +186,7 @@ li { margin: 6px 0; }
 @media (max-width: 860px) {
   .grid { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr; }
-  .hero-card img { height: 280px; }
+  .hero-card img { height: auto; }
   .nav { align-items: flex-start; flex-direction: column; }
 }
 </style>
@@ -196,7 +204,7 @@ li { margin: 6px 0; }
       </div>
       <div class="kicker">České vysoké učení technické v Praze · Fakulta stavební</div>
       <h1>PhD studium na ČVUT</h1>
-      <p class="subtitle">Dizertační výzkum zaměřený na oběhové hospodářství v dopravní infrastruktuře, BIM materiálové pasy, predikci stavebního a demoličního odpadu a hodnocení uhlíkové stopy / Whole Life Carbon.</p>
+      <p class="subtitle">Dizertační výzkum zaměřený na oběhové hospodářství v dopravní infrastruktuře, BIM materiálové pasy, predikci stavebního a demoličního odpadu a hodnocení uhlíkové stopy / hodnocení uhlíku v celém životním cyklu.</p>
       <div class="pills"><span class="pill">ČVUT FSv</span>
 <span class="pill">Katedra silničních staveb</span>
 <span class="pill">BIM</span>
@@ -218,7 +226,7 @@ li { margin: 6px 0; }
         <h3>Akademické zařazení</h3>
 <p>Doktorské studium na Českém vysokém učení technickém v Praze, Fakultě stavební, Katedře silničních staveb. Studijní program je Konstrukce a dopravní stavby a školitelem je doc. Ing. Jan Valentin, Ph.D.</p>
 <h3>Dizertační téma</h3>
-<p>Studie k odborné rozpravě nese název Oběhové hospodářství v dopravní infrastruktuře: prověření metody BIM s vazbou na predikci vzniku stavebního odpadu z demolic a vyhodnocení uhlíkové stopy. Téma propojuje BIM, cirkulární ekonomiku, predikci materiálových toků, LCA a Whole Life Carbon u dopravních staveb.</p>
+<p>Studie k odborné rozpravě nese název Oběhové hospodářství v dopravní infrastruktuře: prověření metody BIM s vazbou na predikci vzniku stavebního odpadu z demolic a vyhodnocení uhlíkové stopy. Téma propojuje BIM, cirkulární ekonomiku, predikci materiálových toků, LCA a hodnocení uhlíku v celém životním cyklu u dopravních staveb.</p>
 <h3>Vědecké ukotvení</h3>
 <p>Základní argument práce je, že BIM může fungovat jako datová páteř materiálového pasu infrastruktury: místo budoucí neroztříděné hromady odpadu lze na konci životního cyklu získat inventarizovanou a klasifikovanou zásobu materiálů s uhlíkovou i finanční hodnotou.</p>
 <h3>Metodický směr</h3>
@@ -234,12 +242,6 @@ li { margin: 6px 0; }
         <p class="note">Odkazy se otevírají v novém okně. Dokument je součástí repozitáře GitHub Pages.</p>
       </aside>
     </div>
-
-    <section class="card" style="margin-top:22px;">
-      <h2>Obrázky a související materiály</h2>
-      <div class="gallery"><figure><img src="assets/data-standards-concept.png" alt="Datové standardy a BIM datové toky"><figcaption>BIM a strukturovaná data jako základ predikce materiálových toků.</figcaption></figure>
-<figure><img src="assets/carbon-delivery-concept.png" alt="Uhlíkově odpovědná infrastruktura"><figcaption>Hodnocení uhlíku a cirkulární ekonomiky ve vazbě na infrastrukturní aktiva.</figcaption></figure></div>
-    </section>
   </main>
 
   <footer class="footer">© 2026 Zdeněk Fulka · tematická stránka PhD studia.</footer>
