@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rozhodovací podpora infrastruktury | Zdeněk Fulka</title>
+<style>
+:root {
+  --bg: #edf2f6;
+  --nav: #07121d;
+  --text: #203040;
+  --muted: #65778a;
+  --heading: #102130;
+  --primary: #1e69c8;
+  --accent: #f36d21;
+  --green: #16864a;
+  --line: rgba(16,33,48,0.10);
+  --card: rgba(255,255,255,0.94);
+  --shadow: 0 18px 46px rgba(8,22,36,0.12);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(30,105,200,0.14), transparent 28%),
+    radial-gradient(circle at 88% 10%, rgba(37,191,212,0.12), transparent 24%),
+    linear-gradient(180deg, #e2eaf1 0, #f3f6f8 260px, #eef2f5 100%);
+  line-height: 1.68;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.top {
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(7,18,29,0.96), rgba(16,48,78,0.94)),
+    repeating-linear-gradient(110deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 18px);
+}
+.top-inner { max-width: 1160px; margin: 0 auto; padding: 28px 24px 58px; }
+.nav { display:flex; justify-content:space-between; align-items:center; gap:18px; margin-bottom:52px; }
+.brand { color:#fff; font-weight:900; font-size:1.05rem; letter-spacing:.01em; }
+.back { color:rgba(255,255,255,.78); font-weight:800; font-size:.92rem; }
+.kicker { color:#66d9e8; text-transform:uppercase; font-size:.78rem; font-weight:900; letter-spacing:.16em; margin-bottom:14px; }
+h1 { margin:0; max-width:900px; font-size:clamp(2.45rem,5vw,5.1rem); line-height:.98; letter-spacing:-.045em; }
+.subtitle { max-width:880px; margin:22px 0 0; color:rgba(255,255,255,.84); font-size:clamp(1.04rem,1.55vw,1.24rem); }
+.pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.pill { padding:8px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.08); color:#fff; font-weight:750; font-size:.88rem; }
+.wrap { max-width:1160px; margin:-34px auto 0; padding:0 24px 56px; }
+.hero-card {
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.76);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  padding:28px;
+}
+.intro-grid { display:grid; grid-template-columns:1.25fr .75fr; gap:24px; align-items:start; }
+.card {
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:24px;
+  box-shadow:0 12px 30px rgba(8,22,36,.08);
+  padding:28px;
+}
+h2 { margin:0 0 14px; color:var(--heading); font-size:1.5rem; letter-spacing:-.02em; }
+h3 { margin:22px 0 8px; color:var(--heading); font-size:1.06rem; }
+p { margin:0 0 14px; }
+ul { margin:8px 0 0 20px; padding:0; }
+li { margin:6px 0; }
+.packages { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; margin-top:24px; }
+.package { border-left:5px solid var(--primary); }
+.package:nth-child(2) { border-left-color:var(--green); }
+.package:nth-child(3) { border-left-color:var(--accent); }
+.package:nth-child(4) { border-left-color:#25bfd4; }
+.tagline { color:var(--primary); font-weight:900; margin-bottom:10px; }
+.note { color:var(--muted); font-size:.94rem; }
+.btns { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 13px; border-radius:14px;
+  border:1px solid rgba(30,105,200,.22);
+  background:#fff; color:var(--primary); font-weight:900;
+}
+.btn.primary { background:var(--primary); color:#fff; border-color:var(--primary); }
+.footer { max-width:1160px; margin:0 auto; padding:28px 24px 46px; color:var(--muted); font-size:.92rem; }
+@media (max-width: 860px) {
+  .nav { align-items:flex-start; flex-direction:column; margin-bottom:34px; }
+  .intro-grid, .packages { grid-template-columns:1fr; }
+  .wrap { margin-top:-22px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="nav">
+      <a class="brand" href="cs.html">Zdeněk Fulka</a>
+      <div>
+        <a class="back" href="cs.html">← Zpět na hlavní stránku</a>
+        <span style="color:rgba(255,255,255,.35); padding:0 10px;">|</span>
+        <a class="back" href="infrastructure-decision-support.html">🇬🇧 English</a>
+      </div>
+    </div>
+    <div class="kicker">BIM · uhlíková stopa · správa majetku · AI supported decision</div>
+    <h1>Specializovaná rozhodovací podpora pro infrastrukturu</h1>
+    <p class="subtitle">Pomáhám veřejným zadavatelům, projektantům a zhotovitelům převádět technická data, stav majetku, BIM modely, uhlíkovou stopu a cirkulární principy do praktických rozhodnutí.</p>
+    <div class="pills">
+      <span class="pill">Bridge Asset Check</span>
+      <span class="pill">Carbon Optimisation</span>
+      <span class="pill">FULL BIM / FLAT BIM</span>
+      <span class="pill">Digital Asset Framework</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-card">
+    <div class="intro-grid">
+      <div>
+        <h2>Pro koho je služba určena</h2>
+        <p>Nabídka je určena organizacím, které potřebují expertní kapacitu pro konkrétní úkol bez nutnosti budovat vlastní interní specializovaný tým nebo zapojovat rozsáhlé konzultační struktury.</p>
+        <p>Typicky jde o obce, města, veřejné instituce, správce infrastruktury, projektanty a zhotovitele, kteří řeší technickou správu majetku, přípravu zadání, uhlíkové požadavky, digitalizaci dokumentace nebo variantní rozhodování.</p>
+      </div>
+      <aside class="card">
+        <h2>Typické výstupy</h2>
+        <ul>
+          <li>technický protokol nebo stručná hodnotící zpráva,</li>
+          <li>rozhodovací matice a porovnání variant,</li>
+          <li>podklady pro zadání veřejné zakázky,</li>
+          <li>BIM / IFC datový výstup nebo datová struktura,</li>
+          <li>doporučení dalšího postupu pro zadavatele, projektanta nebo zhotovitele.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="packages">
+    <article class="card package">
+      <h2>1. Bridge Asset Check</h2>
+      <div class="tagline">Mostní objekty, před-prohlídky a evidence</div>
+      <p>Technická podpora pro obce, města a správce komunikací, kteří potřebují získat přehled o stavu mostů, lávek, propustků a dalších mostních objektů.</p>
+      <h3>Nabízené činnosti</h3>
+      <ul>
+        <li>před-prohlídka mostního objektu s využitím lehkého dronu,</li>
+        <li>fotodokumentace viditelných poruch a obtížně přístupných míst,</li>
+        <li>stručný technický protokol a doporučení dalšího postupu,</li>
+        <li>podklad pro rozpočet, údržbu, diagnostiku nebo projektovou dokumentaci,</li>
+        <li>podpora evidence objektů podle ČSN 73 6220.</li>
+      </ul>
+      <p class="note">Rámec: ČSN 73 6220, ČSN 73 6221, ČSN 73 6222, metodika M7, TP 65 a související předpisy. AI lze využít pouze jako podporu při třídění fotodokumentace, nikoli jako náhradu odborné prohlídky.</p>
+    </article>
+
+    <article class="card package">
+      <h2>2. Carbon & Construction Optimisation Review</h2>
+      <div class="tagline">Uhlíková stopa, ESG a optimalizace návrhu i realizace</div>
+      <p>Externí specializovaná podpora v oblasti uhlíkové stopy, cirkulární ekonomiky, materiálových toků a procesní optimalizace stavebních projektů.</p>
+      <h3>Nabízené činnosti</h3>
+      <ul>
+        <li>rychlý uhlíkový screening stavby nebo projektové varianty,</li>
+        <li>porovnání návrhových variant z hlediska CO₂, materiálů a proveditelnosti,</li>
+        <li>návrh optimalizačních opatření pro projektanta nebo zhotovitele,</li>
+        <li>podpora při formulaci požadavků na uhlíkovou stopu a cirkularitu,</li>
+        <li>kontrola datové kvality výkazu výměr nebo BIM modelu.</li>
+      </ul>
+      <p class="note">AI supported workflow lze využít pro předtřídění variant, identifikaci možných úspor a přípravu rozhodovací matice. Finální doporučení zůstává založené na technickém úsudku a transparentních předpokladech.</p>
+    </article>
+
+    <article class="card package">
+      <h2>3. BIM from Existing Documentation</h2>
+      <div class="tagline">Převod 2D dokumentace do FULL BIM nebo FLAT BIM</div>
+      <p>Převod stávající 2D dokumentace do využitelné digitální podoby podle účelu využití, rozpočtu a požadované datové podrobnosti.</p>
+      <h3>FULL BIM</h3>
+      <p>Plnohodnotný 3D informační model pro projekci, koordinaci, výkazy, správu majetku nebo budoucí digitální dvojče.</p>
+      <h3>FLAT BIM</h3>
+      <p>Úsporný datový model nad 2D dokumentací pro evidenci, pasportizaci, výkazy a rozhodování bez nutnosti vytvářet drahý detailní 3D model.</p>
+      <ul>
+        <li>strukturovaná objektová skladba,</li>
+        <li>základní atributy, plochy, délky a objemy,</li>
+        <li>možnost exportu do IFC,</li>
+        <li>podklady pro správu majetku, materiálové pasporty a uhlíkové hodnocení.</li>
+      </ul>
+    </article>
+
+    <article class="card package">
+      <h2>4. Digital Asset & Decision Framework</h2>
+      <div class="tagline">Datová struktura, pasport a prioritizace investic</div>
+      <p>Strategický první krok pro vlastníky a správce, kteří mají data v PDF, DWG, Excelu, starých pasportech nebo neúplných podkladech a potřebují z nich vytvořit použitelný systém pro rozhodování.</p>
+      <h3>Nabízené činnosti</h3>
+      <ul>
+        <li>audit dostupných dat a dokumentace,</li>
+        <li>návrh minimální datové struktury pro správu majetku,</li>
+        <li>klasifikace objektů a atributů,</li>
+        <li>vazba na BIM, IFC, bSDD, CCI nebo interní pasportní strukturu,</li>
+        <li>prioritizace objektů podle stavu, rizika, nákladů, uhlíku a provozní důležitosti.</li>
+      </ul>
+      <p class="note">Výsledkem může být rozhodovací matice pro investice, opravy, údržbu, digitalizaci nebo postupnou přípravu datového prostředí.</p>
+    </article>
+  </section>
+
+  <section class="card" style="margin-top:24px;">
+    <h2>Princip spolupráce</h2>
+    <p>Důraz je kladen na prakticky využitelné výstupy, nikoli na teoretickou studii bez vazby na rozhodnutí. Cílem je pomoci zadavateli, projektantovi nebo zhotoviteli rychle pochopit dostupná data, rizika, varianty a další kroky.</p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:fulka@outlook.cz?subject=Konzultace%20-%20rozhodovaci%20podpora%20infrastruktury">Nezávazně poptat konzultaci</a>
+      <a class="btn" href="https://www.fulka.eu">Zpět na hlavní web</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">© 2026 Zdeněk Fulka · specializovaná rozhodovací podpora pro infrastrukturu.</footer>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Infrastructure Decision Support | Zdeněk Fulka</title>
+<style>
+:root {
+  --bg: #edf2f6;
+  --nav: #07121d;
+  --text: #203040;
+  --muted: #65778a;
+  --heading: #102130;
+  --primary: #1e69c8;
+  --accent: #f36d21;
+  --green: #16864a;
+  --line: rgba(16,33,48,0.10);
+  --card: rgba(255,255,255,0.94);
+  --shadow: 0 18px 46px rgba(8,22,36,0.12);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(30,105,200,0.14), transparent 28%),
+    radial-gradient(circle at 88% 10%, rgba(37,191,212,0.12), transparent 24%),
+    linear-gradient(180deg, #e2eaf1 0, #f3f6f8 260px, #eef2f5 100%);
+  line-height: 1.68;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.top {
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(7,18,29,0.96), rgba(16,48,78,0.94)),
+    repeating-linear-gradient(110deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 18px);
+}
+.top-inner { max-width: 1160px; margin: 0 auto; padding: 28px 24px 58px; }
+.nav { display:flex; justify-content:space-between; align-items:center; gap:18px; margin-bottom:52px; }
+.brand { color:#fff; font-weight:900; font-size:1.05rem; letter-spacing:.01em; }
+.back { color:rgba(255,255,255,.78); font-weight:800; font-size:.92rem; }
+.kicker { color:#66d9e8; text-transform:uppercase; font-size:.78rem; font-weight:900; letter-spacing:.16em; margin-bottom:14px; }
+h1 { margin:0; max-width:900px; font-size:clamp(2.45rem,5vw,5.1rem); line-height:.98; letter-spacing:-.045em; }
+.subtitle { max-width:880px; margin:22px 0 0; color:rgba(255,255,255,.84); font-size:clamp(1.04rem,1.55vw,1.24rem); }
+.pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.pill { padding:8px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.08); color:#fff; font-weight:750; font-size:.88rem; }
+.wrap { max-width:1160px; margin:-34px auto 0; padding:0 24px 56px; }
+.hero-card {
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.76);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  padding:28px;
+}
+.intro-grid { display:grid; grid-template-columns:1.25fr .75fr; gap:24px; align-items:start; }
+.card {
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:24px;
+  box-shadow:0 12px 30px rgba(8,22,36,.08);
+  padding:28px;
+}
+h2 { margin:0 0 14px; color:var(--heading); font-size:1.5rem; letter-spacing:-.02em; }
+h3 { margin:22px 0 8px; color:var(--heading); font-size:1.06rem; }
+p { margin:0 0 14px; }
+ul { margin:8px 0 0 20px; padding:0; }
+li { margin:6px 0; }
+.packages { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; margin-top:24px; }
+.package { border-left:5px solid var(--primary); }
+.package:nth-child(2) { border-left-color:var(--green); }
+.package:nth-child(3) { border-left-color:var(--accent); }
+.package:nth-child(4) { border-left-color:#25bfd4; }
+.tagline { color:var(--primary); font-weight:900; margin-bottom:10px; }
+.note { color:var(--muted); font-size:.94rem; }
+.btns { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 13px; border-radius:14px;
+  border:1px solid rgba(30,105,200,.22);
+  background:#fff; color:var(--primary); font-weight:900;
+}
+.btn.primary { background:var(--primary); color:#fff; border-color:var(--primary); }
+.footer { max-width:1160px; margin:0 auto; padding:28px 24px 46px; color:var(--muted); font-size:.92rem; }
+@media (max-width: 860px) {
+  .nav { align-items:flex-start; flex-direction:column; margin-bottom:34px; }
+  .intro-grid, .packages { grid-template-columns:1fr; }
+  .wrap { margin-top:-22px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="nav">
+      <a class="brand" href="index.html">Zdeněk Fulka</a>
+      <div>
+        <a class="back" href="index.html">← Back to homepage</a>
+        <span style="color:rgba(255,255,255,.35); padding:0 10px;">|</span>
+        <a class="back" href="rozhodovaci-podpora-infrastruktury.html">🇨🇿 Česky</a>
+      </div>
+    </div>
+    <div class="kicker">BIM · carbon footprint · asset management · AI supported decision</div>
+    <h1>Specialised decision support for infrastructure</h1>
+    <p class="subtitle">I help public procurers, designers and contractors turn technical data, asset condition, BIM models, carbon footprint and circular economy principles into practical decisions.</p>
+    <div class="pills">
+      <span class="pill">Bridge Asset Check</span>
+      <span class="pill">Carbon Optimisation</span>
+      <span class="pill">FULL BIM / FLAT BIM</span>
+      <span class="pill">Digital Asset Framework</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-card">
+    <div class="intro-grid">
+      <div>
+        <h2>Who the service is for</h2>
+        <p>The offer is designed for organisations that need specialist expertise for a defined task without building a permanent internal team or involving a large consulting structure.</p>
+        <p>Typical clients include municipalities, public institutions, infrastructure owners, designers and contractors dealing with asset management, procurement preparation, carbon requirements, documentation digitalisation or option appraisal.</p>
+      </div>
+      <aside class="card">
+        <h2>Typical outputs</h2>
+        <ul>
+          <li>technical protocol or concise review report,</li>
+          <li>decision matrix and option comparison,</li>
+          <li>procurement and tender input,</li>
+          <li>BIM / IFC data output or asset data structure,</li>
+          <li>recommended next steps for the procurer, designer or contractor.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="packages">
+    <article class="card package">
+      <h2>1. Bridge Asset Check</h2>
+      <div class="tagline">Bridge assets, preliminary inspection and evidence support</div>
+      <p>Technical support for municipalities, cities and road authorities that need a clear first view of the condition of bridges, footbridges, culverts and related transport infrastructure assets.</p>
+      <h3>Scope of work</h3>
+      <ul>
+        <li>preliminary bridge asset review using a lightweight drone,</li>
+        <li>photo documentation of visible defects and hard to access areas,</li>
+        <li>concise technical protocol and recommendation of next steps,</li>
+        <li>input for budgeting, maintenance, diagnostics or design documentation,</li>
+        <li>support for bridge asset records according to Czech technical standards.</li>
+      </ul>
+      <p class="note">Reference framework: ČSN 73 6220, ČSN 73 6221, ČSN 73 6222, M7 methodology, TP 65 and related documents. AI may support photo sorting and documentation review, but it does not replace professional engineering judgement or formal inspection responsibility.</p>
+    </article>
+
+    <article class="card package">
+      <h2>2. Carbon & Construction Optimisation Review</h2>
+      <div class="tagline">Carbon footprint, ESG and design or construction optimisation</div>
+      <p>External specialist support for carbon footprint assessment, circular economy, material flow analysis and process optimisation in construction and infrastructure projects.</p>
+      <h3>Scope of work</h3>
+      <ul>
+        <li>rapid carbon screening of a project or design option,</li>
+        <li>comparison of design options in terms of CO₂, materials and feasibility,</li>
+        <li>optimisation recommendations for designers or contractors,</li>
+        <li>support with procurement requirements for carbon and circularity,</li>
+        <li>review of bill of quantities or BIM model data quality for carbon assessment.</li>
+      </ul>
+      <p class="note">AI supported workflows can help pre screen options, identify possible savings and prepare a decision matrix. Final recommendations remain based on engineering judgement, available data and transparent assumptions.</p>
+    </article>
+
+    <article class="card package">
+      <h2>3. BIM from Existing Documentation</h2>
+      <div class="tagline">Conversion of 2D documentation into FULL BIM or FLAT BIM</div>
+      <p>Conversion of existing 2D documentation into a usable digital information model according to the intended use, budget and required data granularity.</p>
+      <h3>FULL BIM</h3>
+      <p>A full 3D information model for design, coordination, quantities, asset management or future digital twin development.</p>
+      <h3>FLAT BIM</h3>
+      <p>A lean data model built over existing 2D documentation for asset records, inventories, quantities and decision making without the cost of a detailed full 3D model.</p>
+      <ul>
+        <li>structured object breakdown,</li>
+        <li>basic attributes, areas, lengths and volumes,</li>
+        <li>possible IFC export,</li>
+        <li>input for asset management, material passports and carbon evaluation.</li>
+      </ul>
+    </article>
+
+    <article class="card package">
+      <h2>4. Digital Asset & Decision Framework</h2>
+      <div class="tagline">Asset data structure, inventory and investment prioritisation</div>
+      <p>A strategic first step for owners and operators who have data in PDF, DWG, Excel, legacy inventories or incomplete records and need to transform it into a usable decision support system.</p>
+      <h3>Scope of work</h3>
+      <ul>
+        <li>audit of available data and documentation,</li>
+        <li>minimum asset data structure for asset management,</li>
+        <li>classification of objects and attributes,</li>
+        <li>link to BIM, IFC, bSDD, CCI or internal asset inventory structures,</li>
+        <li>prioritisation of assets by condition, risk, cost, carbon and operational importance.</li>
+      </ul>
+      <p class="note">The output may include a decision matrix for investment planning, repair, maintenance, digitalisation or gradual preparation of an asset data environment.</p>
+    </article>
+  </section>
+
+  <section class="card" style="margin-top:24px;">
+    <h2>Working principle</h2>
+    <p>The focus is on practical outputs that support a real decision, not on theoretical reports without implementation value. The aim is to help the procurer, designer or contractor understand available data, risks, options and next steps.</p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:fulka@outlook.cz?subject=Consultation%20-%20infrastructure%20decision%20support">Request an initial consultation</a>
+      <a class="btn" href="https://www.fulka.eu">Back to main website</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">© 2026 Zdeněk Fulka · specialised infrastructure decision support.</footer>
+</body>
+</html>
