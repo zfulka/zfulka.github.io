@@ -1,0 +1,3 @@
+Tato verze úplně odstraňuje spodní štítky/chips v hlavičkách tematických stránek.
+Zůstává pouze horní textový kicker řádek, například PAPERLESS WORKFLOWS · REBAR MODELLING · PYTHON.
+Datum přípravy: 2026-08-01.
