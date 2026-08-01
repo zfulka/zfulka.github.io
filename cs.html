@@ -1,1352 +1,497 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zdeněk Fulka | Infrastruktura, BIM a udržitelnost</title>
-  <meta name="description" content="Osobní web Zdeňka Fulky – projektového manažera a specialisty na BIM a udržitelnost se zaměřením na dopravní infrastrukturu, mostní konstrukce, cirkulární ekonomiku, snižování uhlíkové stopy a digitalizaci výzkumných infrastruktur." />
-  <meta name="author" content="Zdeněk Fulka" />
-  <meta property="og:title" content="Zdeněk Fulka | Infrastructure, BIM & Sustainability" />
-  <meta property="og:description" content="Projektový manažer a výzkumný inženýr zaměřený na BIM, dopravní infrastrukturu, cirkulární ekonomiku a udržitelnost." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://zfulka.github.io" />
-  <style>
-    :root {
-      --bg: #edf2f6;
-      --paper: rgba(255,255,255,0.86);
-      --paper-strong: rgba(255,255,255,0.95);
-      --nav: rgba(6,17,29,0.88);
-      --text: #233445;
-      --muted: #67788a;
-      --heading: #102130;
-      --primary: #1e69c8;
-      --primary-soft: rgba(30,105,200,0.12);
-      --accent: #f36d21;
-      --accent-soft: rgba(243,109,33,0.14);
-      --cyan: #25bfd4;
-      --line: rgba(16,33,48,0.08);
-      --shadow: 0 18px 50px rgba(8, 22, 36, 0.12);
-      --radius: 24px;
-      --max: 1280px;
-      --sidebar: 330px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--text);
-      font: 16px/1.7 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background:
-        radial-gradient(circle at 14% 10%, rgba(30,105,200,0.16), transparent 26%),
-        radial-gradient(circle at 86% 0%, rgba(37,191,212,0.14), transparent 24%),
-        linear-gradient(180deg, #e1e8ef 0, #edf2f6 220px, #eef2f5 100%);
-    }
-    a { color: var(--primary); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    img { display: block; max-width: 100%; }
-
-    .topbar {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(16px);
-      background: var(--nav);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .topbar-inner {
-      max-width: var(--max); margin: 0 auto; min-height: 72px; padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between; gap: 20px;
-    }
-    .brand { color: #fff; font-weight: 800; letter-spacing: .02em; font-size: 1.70rem; }
-    .brand span { color: var(--accent); }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 20px; }
-    .nav-links a { color: rgba(255,255,255,0.88); font-size: .95rem; font-weight: 500; }
-    .nav-links a:hover { color: #fff; text-decoration: none; }
-
-
-    .language-switch {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.10);
-    }
-    .language-switch a {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      color: rgba(255,255,255,0.82);
-      font-weight: 700;
-      font-size: .9rem;
-    }
-    .language-switch a:hover {
-      text-decoration: none;
-      color: #fff;
-      background: rgba(255,255,255,0.10);
-    }
-    .language-switch a.active {
-      color: #fff;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
-    }
-    .flag {
-      font-size: 1.05rem;
-      line-height: 1;
-    }
-
-    .hero {
-      position: relative; overflow: hidden; color: #fff;
-      background:
-        linear-gradient(120deg, rgba(5,13,23,0.95), rgba(9,22,37,0.86) 48%, rgba(8,18,31,0.96)),
-        radial-gradient(circle at 15% 20%, rgba(243,109,33,0.26), transparent 16%),
-        radial-gradient(circle at 72% 18%, rgba(30,105,200,0.22), transparent 18%),
-        radial-gradient(circle at 88% 80%, rgba(37,191,212,0.18), transparent 16%);
-    }
-    .hero::before {
-      content: ""; position: absolute; inset: 0;
-      background:
-        repeating-linear-gradient(112deg, rgba(255,255,255,0.08) 0 2px, transparent 2px 15px),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
-      opacity: .45; pointer-events: none;
-    }
-    .hero::after {
-      content: ""; position: absolute; right: -6%; top: 34%; width: 56%; height: 3px;
-      transform: rotate(-9deg);
-      background: linear-gradient(90deg, transparent 0, rgba(255,255,255,0.1) 12%, rgba(243,109,33,0.95) 35%, rgba(254,222,163,0.92) 42%, rgba(37,191,212,0.8) 64%, transparent 100%);
-      box-shadow: 0 0 14px rgba(243,109,33,0.85), 0 0 30px rgba(37,191,212,0.45);
-      opacity: .92;
-      pointer-events: none;
-    }
-    .hero-inner {
-      position: relative; z-index: 2; max-width: var(--max); margin: 0 auto;
-      padding: 78px 24px 94px;
-      display: grid; grid-template-columns: minmax(0, 1.15fr) 340px; gap: 30px; align-items: end;
-    }
-    .kicker {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: .83rem; text-transform: uppercase; letter-spacing: .1em;
-      color: rgba(255,255,255,0.78); margin-bottom: 16px;
-    }
-    .kicker::before { content: ""; width: 34px; height: 2px; background: linear-gradient(90deg, var(--accent), #fff); border-radius: 999px; }
-    .hero h1 {
-      margin: 0; max-width: 760px; line-height: 1.02; letter-spacing: -.03em;
-      font-size: clamp(2.7rem, 5vw, 4.3rem);
-    }
-    .hero p {
-      max-width: 780px; margin: 18px 0 0; font-size: clamp(1.05rem, 1.65vw, 1.22rem);
-      color: rgba(255,255,255,0.87);
-    }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: .88rem;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(6px);
-      color: #fff;
-      text-decoration: none;
-      transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .hero-tag:hover {
-      text-decoration: none;
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.14);
-      border-color: rgba(255,255,255,0.25);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-    }
-    .hero-topic-note {
-      margin-top: 12px;
-      color: rgba(255,255,255,0.68);
-      font-size: .9rem;
-    }
-    .hero-panel {
-      border-radius: 22px; padding: 22px; backdrop-filter: blur(12px);
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 12px 35px rgba(0,0,0,0.18);
-    }
-    .hero-panel .label { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,0.72); }
-    .hero-panel strong { display: block; margin: 10px 0 8px; font-size: 1.28rem; }
-    .hero-panel p { margin: 0; font-size: .97rem; }
-
-    .page {
-      max-width: var(--max); margin: -46px auto 0; padding: 0 24px 48px; position: relative; z-index: 5;
-    }
-    .layout { display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); gap: 28px; align-items: start; }
-
-    .sidebar {
-      position: sticky; top: 96px; overflow: hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.82));
-      border: 1px solid rgba(255,255,255,0.7); border-radius: 28px; box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-    .sidebar-top {
-      padding: 28px 28px 22px;
-      background: linear-gradient(180deg, rgba(30,105,200,0.09), rgba(255,255,255,0));
-      border-bottom: 1px solid rgba(16,33,48,0.05);
-    }
-    .profile-frame {
-      width: 205px; height: 205px; margin-bottom: 22px; border-radius: 30px;
-      padding: 5px; background: linear-gradient(145deg, rgba(243,109,33,0.85), rgba(30,105,200,0.75) 55%, rgba(37,191,212,0.85));
-      box-shadow: 0 16px 32px rgba(8,22,36,0.18);
-    }
-    .profile-frame img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center 18%;
-      border-radius: 26px; background: #d8e1ea; display: block;
-    }
-    .profile-frame a { display: block; width: 100%; height: 100%; cursor: zoom-in; }
-    .sidebar h2 { margin: 0; font-size: 2.45rem; line-height: 0.98; color: var(--heading); letter-spacing: -0.045em; }
-    .role { margin-top: 10px; color: var(--primary); font-weight: 800; }
-    .location { margin-top: 8px; color: var(--muted); font-size: .96rem; }
-    .summary { margin-top: 14px; color: var(--muted); font-size: .95rem; }
-    .business-summary {
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-      color: var(--text);
-    }
-    .business-summary strong { color: var(--heading); }
-    .detail-list {
-      display: grid;
-      gap: 10px;
-      margin: 0;
-    }
-    .detail-row {
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 14px;
-      padding: 12px 0;
-      border-top: 1px solid var(--line);
-    }
-    .detail-row:first-child { border-top: 0; }
-    .detail-label {
-      color: var(--muted);
-      font-weight: 700;
-    }
-    .detail-value {
-      color: var(--text);
-      font-weight: 500;
-    }
-    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 11px 15px; border-radius: 14px; border: 1px solid transparent; font-weight: 700;
-      transition: transform .18s ease;
-    }
-    .btn:hover { text-decoration: none; transform: translateY(-1px); }
-    .btn-primary { background: linear-gradient(135deg, var(--accent), #ff8b46); color: #fff; box-shadow: 0 12px 25px rgba(243,109,33,0.24); }
-    .btn-secondary { background: rgba(255,255,255,0.72); border-color: var(--line); color: var(--text); }
-
-    .side-list { list-style: none; margin: 0; padding: 18px 18px 22px; display: grid; gap: 10px; }
-    .side-list a {
-      display: flex; justify-content: space-between; align-items: center; gap: 14px;
-      border-radius: 14px; padding: 11px 13px; background: rgba(255,255,255,0.58); color: var(--text);
-      border: 1px solid rgba(16,33,48,0.04); font-weight: 500;
-    }
-    .side-list a:hover { text-decoration: none; background: rgba(255,255,255,0.88); }
-
-    .main { display: grid; gap: 22px; }
-    .card {
-      background: var(--paper); border-radius: 28px; padding: 34px; box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,0.72); backdrop-filter: blur(12px);
-    }
-    .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 18px; }
-    .section-head h3 { margin: 0; font-size: 1.72rem; letter-spacing: -.02em; color: var(--heading); }
-    .mini { font-size: .8rem; text-transform: uppercase; letter-spacing: .09em; color: var(--primary); font-weight: 800; }
-    .lead { margin-top: 0; font-size: 1.16rem; color: #33485d; }
-
-    .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; margin-top: 22px; }
-    .stat {
-      padding: 18px; border-radius: 18px; border: 1px solid rgba(16,33,48,0.05);
-      background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(248,250,252,0.95));
-    }
-    .stat strong { display: block; font-size: 1.8rem; line-height: 1; margin-bottom: 7px; color: var(--heading); }
-    .stat span { color: var(--muted); font-size: .92rem; }
-
-    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    .chip {
-      cursor: pointer;
-      appearance: none;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: .95rem;
-      font-weight: 700;
-      background: linear-gradient(180deg, rgba(30,105,200,0.12), rgba(37,191,212,0.1));
-      color: #224d73;
-      border: 1px solid rgba(30,105,200,0.16);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.76), 0 6px 16px rgba(19,65,108,0.06);
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
-    }
-    .chip:hover {
-      transform: translateY(-2px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 12px 22px rgba(19,65,108,0.12);
-      background: linear-gradient(180deg, rgba(30,105,200,0.18), rgba(37,191,212,0.16));
-    }
-    .chip:focus-visible {
-      outline: 3px solid rgba(243,109,33,0.38);
-      outline-offset: 3px;
-    }
-    .chip.active {
-      color: #fff;
-      background: linear-gradient(135deg, var(--primary), #25bfd4);
-      border-color: rgba(255,255,255,0.36);
-      box-shadow: 0 14px 28px rgba(30,105,200,0.22);
-    }
-    .expertise-detail {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      align-items: stretch;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(249,252,255,0.9)),
-        radial-gradient(circle at 10% 10%, rgba(30,105,200,0.10), transparent 34%);
-      border: 1px solid rgba(16,33,48,0.06);
-      border-radius: 22px;
-      padding: 22px;
-      min-height: 260px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.86);
-    }
-    .expertise-copy {
-      display: grid;
-      align-content: center;
-      gap: 12px;
-    }
-    .expertise-copy h4 {
-      margin: 0;
-      color: var(--heading);
-      font-size: 1.35rem;
-      letter-spacing: -0.02em;
-    }
-    .expertise-copy p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-    .expertise-copy ul {
-      margin: 4px 0 0;
-      padding-left: 20px;
-      color: var(--text);
-    }
-    .expertise-copy li { margin: 4px 0; }
-    .expertise-visual {
-      min-height: 220px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 24% 18%, rgba(243,109,33,0.20), transparent 22%),
-        radial-gradient(circle at 72% 70%, rgba(37,191,212,0.22), transparent 24%),
-        linear-gradient(135deg, #07121d, #17324d);
-      color: #fff;
-      position: relative;
-    }
-    .expertise-visual::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(120deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
-      opacity: .55;
-    }
-    .expertise-visual svg {
-      position: relative;
-      z-index: 1;
-      width: min(92%, 300px);
-      height: auto;
-      filter: drop-shadow(0 16px 24px rgba(0,0,0,0.28));
-    }
-    .expertise-hint {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: .92rem;
-    }
-
-    .grid-2, .grid-3 { display: grid; gap: 16px; }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    .tile {
-      padding: 22px; border-radius: 20px; background: var(--paper-strong);
-      border: 1px solid rgba(16,33,48,0.05);
-    }
-    .tile h4 { margin: 0 0 8px; font-size: 1.04rem; color: var(--heading); }
-    .tile p { margin: 0; color: var(--muted); font-size: .97rem; }
-
-    .project-card {
-      cursor: pointer;
-      overflow: hidden;
-      padding: 0;
-      text-align: left;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 34px rgba(8,22,36,0.12);
-      border-color: rgba(30,105,200,0.18);
-    }
-    .project-card.active {
-      border-color: rgba(243,109,33,0.42);
-      box-shadow: 0 18px 36px rgba(243,109,33,0.12);
-    }
-    .project-image {
-      height: 142px;
-      background:
-        linear-gradient(135deg, rgba(7,18,29,0.74), rgba(7,18,29,0.18)),
-        var(--project-image) center/cover no-repeat;
-      display: flex;
-      align-items: flex-end;
-      padding: 16px;
-      color: #fff;
-      position: relative;
-    }
-    .project-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 35%, rgba(7,18,29,0.58));
-      pointer-events: none;
-    }
-    .project-badge {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.22);
-      backdrop-filter: blur(8px);
-      font-size: .82rem;
-      font-weight: 800;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-    .project-card-body { padding: 20px 22px 22px; }
-    .project-card h4 { margin: 0 0 8px; color: var(--heading); }
-    .project-card p { margin: 0; color: var(--muted); font-size: .97rem; }
-    .project-card button {
-      all: unset;
-      display: block;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-    }
-    .project-detail {
-      margin-top: 18px;
-      border-radius: 24px;
-      border: 1px solid rgba(16,33,48,0.07);
-      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,251,254,0.9));
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: .82fr 1.18fr;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.88);
-    }
-    .project-detail-image {
-      min-height: 330px;
-      background:
-        linear-gradient(135deg, rgba(7,18,29,0.78), rgba(7,18,29,0.16)),
-        var(--project-detail-image) center/cover no-repeat;
-      position: relative;
-    }
-    .project-detail-logo {
-      position: absolute;
-      left: 18px;
-      bottom: 18px;
-      max-width: 72%;
-      max-height: 68px;
-      object-fit: contain;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.88);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-    }
-    .project-detail-copy {
-      padding: 28px;
-      display: grid;
-      align-content: center;
-      gap: 12px;
-    }
-    .project-detail-copy h4 {
-      margin: 0;
-      color: var(--heading);
-      font-size: 1.55rem;
-      letter-spacing: -0.02em;
-    }
-    .project-detail-copy p {
-      margin: 0;
-      color: var(--muted);
-    }
-    .project-detail-copy ul {
-      margin: 4px 0 0;
-      padding-left: 20px;
-      color: var(--text);
-    }
-    .project-detail-copy li { margin: 4px 0; }
-    .project-topic-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 4px 0 2px;
-    }
-    .topic-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(33,48,68,0.9), rgba(52,68,88,0.9));
-      color: rgba(255,255,255,0.96);
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-      font-weight: 700;
-      font-size: .92rem;
-      letter-spacing: .01em;
-    }
-    .project-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .project-links a {
-      display: inline-flex;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: var(--primary-soft);
-      font-weight: 700;
-      font-size: .92rem;
-    }
-
-    .timeline { display: grid; gap: 0; }
-    .timeline-item {
-      display: grid; grid-template-columns: 160px 1fr; gap: 18px;
-      padding: 18px 0; border-top: 1px solid var(--line);
-    }
-    .timeline-item:first-child { border-top: 0; padding-top: 0; }
-    .time { color: var(--primary); font-weight: 800; font-size: .92rem; }
-    .job h4 { margin: 0 0 4px; font-size: 1.06rem; color: var(--heading); }
-    .org { color: #32485d; font-weight: 700; margin-bottom: 6px; }
-    .job p { margin: 0; color: var(--muted); font-size: .97rem; }
-
-    .footer { max-width: var(--max); margin: 0 auto; padding: 0 24px 40px; color: var(--muted); font-size: .9rem; }
-
-    @media (max-width: 1120px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    @media (max-width: 760px) {
-      .topbar-inner { flex-direction: column; align-items: flex-start; padding-top: 14px; padding-bottom: 14px; }
-      .nav-links { gap: 12px; }
-      .page { margin-top: -22px; }
-      .card { padding: 24px; border-radius: 22px; }
-      .sidebar-top { padding: 24px; }
-      .side-list { padding: 16px 16px 20px; }
-      .grid-2, .grid-3, .stats { grid-template-columns: 1fr; }
-      .expertise-detail { grid-template-columns: 1fr; padding: 18px; }
-      .expertise-visual { min-height: 180px; }
-      .project-detail { grid-template-columns: 1fr; }
-      .project-detail-image { min-height: 230px; }
-      .project-image { height: 128px; }
-      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
-      .detail-row { grid-template-columns: 1fr; gap: 4px; }
-      .hero-inner { padding-top: 56px; padding-bottom: 70px; }
-      .hero h1 { font-size: 2.35rem; }
-      .profile-frame { width: 150px; height: 150px; }
-      .brand { font-size: 1.34rem; }
-      .sidebar h2 { font-size: 2.70rem; }
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Zdeněk Fulka | Prémiové konzultační služby pro infrastrukturu</title>
+<meta name="description" content="Prémiové konzultační služby pro infrastrukturu: mostní objekty, uhlíková a stavební optimalizace, BIM z existující dokumentace, rozhodovací rámce a R&D podpora výzkumných projektů."/>
+<style>
+:root{
+  --nav:#1f2d3a;
+  --hero:#233648;
+  --hero2:#1b2a38;
+  --text:#172536;
+  --muted:#667789;
+  --paper:#ffffff;
+  --line:rgba(255,255,255,.14);
+  --line-dark:rgba(20,38,55,.10);
+  --orange:#ff6b2c;
+  --blue:#2e7bd7;
+  --cyan:#44d4e6;
+  --green:#27a467;
+  --shadow:0 24px 62px rgba(10,25,40,.16);
+  --max:1160px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:#edf3f7;
+  line-height:1.62;
+}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{
+  background:rgba(31,45,58,.98);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.topbar-inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand{
+  color:#fff;
+  font-size:1.32rem;
+  font-weight:950;
+  letter-spacing:-.035em;
+  white-space:nowrap;
+}
+.brand span{color:var(--orange)}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.nav a{
+  color:rgba(255,255,255,.82);
+  font-size:.94rem;
+  font-weight:850;
+}
+.nav a.primary{
+  color:#fff;
+  background:linear-gradient(135deg,var(--orange),#e35720);
+  padding:8px 13px;
+  border-radius:999px;
+}
+.lang{
+  display:flex;
+  gap:6px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  padding:4px;
+}
+.lang a{
+  color:rgba(255,255,255,.78);
+  font-weight:950;
+  font-size:.82rem;
+  padding:5px 8px;
+  border-radius:999px;
+}
+.lang a.active{background:linear-gradient(135deg,#9aa7bd,var(--orange));color:#fff}
+.hero{
+  color:#fff;
+  background:
+    linear-gradient(110deg,rgba(31,45,58,.98),rgba(35,54,72,.94)),
+    repeating-linear-gradient(105deg,rgba(255,255,255,.045) 0 1px,transparent 1px 17px);
+  position:relative;
+  overflow:hidden;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  left:45%;
+  top:54%;
+  width:1000px;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--orange),rgba(255,255,255,.7),transparent);
+  transform:rotate(-7deg);
+  opacity:.7;
+}
+.hero-inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:84px 24px 92px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 330px;
+  gap:54px;
+  align-items:center;
+  position:relative;
+  z-index:2;
+}
+.kicker{
+  color:rgba(255,255,255,.76);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  font-size:.76rem;
+  font-weight:950;
+  margin-bottom:18px;
+}
+.kicker:before{
+  content:"";
+  display:inline-block;
+  width:34px;
+  height:2px;
+  background:var(--orange);
+  vertical-align:middle;
+  margin-right:10px;
+}
+h1{
+  margin:0;
+  max-width:760px;
+  font-size:clamp(2.7rem,5.4vw,5.4rem);
+  line-height:.97;
+  letter-spacing:-.06em;
+}
+.lead{
+  max-width:780px;
+  margin:22px 0 0;
+  font-size:clamp(1.05rem,1.55vw,1.28rem);
+  color:rgba(255,255,255,.90);
+}
+.value-line{
+  margin-top:22px;
+  max-width:760px;
+  color:rgba(255,255,255,.74);
+  font-size:1.02rem;
+}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:11px 15px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  font-weight:950;
+}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,var(--orange),#e35720);border-color:transparent}
+.btn.light{background:#fff;color:var(--text);border-color:#fff}
+.profile{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:28px;
+  padding:22px;
+  box-shadow:0 24px 54px rgba(0,0,0,.20);
+  backdrop-filter:blur(10px);
+}
+.profile-photo{
+  width:172px;
+  height:172px;
+  border-radius:28px;
+  padding:5px;
+  background:linear-gradient(145deg,var(--orange),var(--blue) 60%,var(--cyan));
+  margin-bottom:16px;
+}
+.profile-photo a{display:block;width:100%;height:100%;cursor:zoom-in}
+.profile-photo img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center 18%;
+  border-radius:24px;
+}
+.profile h2{margin:0;color:#fff;font-size:2.1rem;letter-spacing:-.05em;line-height:1}
+.profile p{margin:10px 0 0;color:rgba(255,255,255,.76);font-size:.96rem}
+main{
+  max-width:var(--max);
+  margin:-42px auto 0;
+  padding:0 24px 58px;
+  position:relative;
+  z-index:3;
+}
+.section{
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.78);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  padding:32px;
+  margin-bottom:24px;
+}
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:18px;
+  margin-bottom:20px;
+}
+.mini{
+  color:var(--blue);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-size:.75rem;
+  font-weight:950;
+  margin-bottom:8px;
+}
+h2{
+  margin:0;
+  color:var(--text);
+  font-size:clamp(1.8rem,3vw,2.75rem);
+  line-height:1.04;
+  letter-spacing:-.045em;
+}
+.intro{
+  max-width:820px;
+  margin:0 0 22px;
+  color:#465b70;
+  font-size:1.06rem;
+}
+.services{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:17px;
+}
+.card{
+  background:#fff;
+  border:1px solid var(--line-dark);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 10px 28px rgba(10,25,40,.065);
+}
+.card h3{
+  margin:0 0 8px;
+  color:var(--text);
+  font-size:1.18rem;
+  letter-spacing:-.02em;
+}
+.card p{margin:0;color:var(--muted)}
+.card ul{margin:14px 0 0 19px;padding:0;color:#34475a}
+.card li{margin:5px 0}
+.service-title{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:10px;
+}
+.no{
+  width:32px;
+  height:32px;
+  flex:0 0 32px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-weight:950;
+  background:rgba(46,123,215,.10);
+  color:var(--blue);
+}
+.services .card:nth-child(2) .no{background:rgba(39,164,103,.12);color:var(--green)}
+.services .card:nth-child(3) .no{background:rgba(255,107,44,.13);color:var(--orange)}
+.services .card:nth-child(4) .no{background:rgba(68,212,230,.16);color:#0d8291}
+.services .card:nth-child(5) .no{background:rgba(31,45,58,.11);color:var(--text)}
+.more{display:inline-flex;margin-top:14px;font-weight:950}
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.badges{display:flex;flex-wrap:wrap;gap:10px}
+.badge{
+  display:inline-flex;
+  background:#fff;
+  border:1px solid var(--line-dark);
+  border-radius:999px;
+  padding:9px 13px;
+  color:#304458;
+  font-weight:850;
+}
+.docs{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+}
+.contact{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+.contact-lines{
+  background:#fff;
+  border:1px solid var(--line-dark);
+  border-radius:20px;
+  padding:18px;
+}
+.line{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:8px 0;
+  border-bottom:1px solid var(--line-dark);
+}
+.line:last-child{border-bottom:0}
+.line strong{color:var(--text)}
+footer{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 24px 42px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+@media(max-width:920px){
+  .hero-inner{grid-template-columns:1fr;padding-top:52px}
+  .services,.split,.docs,.contact{grid-template-columns:1fr}
+  .nav{display:none}
+  .section-head{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:560px){
+  .topbar-inner{align-items:flex-start;flex-direction:column}
+  .section{padding:24px;border-radius:24px}
+  .line{flex-direction:column;gap:2px}
+}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">Zdeněk <span>Fulka</span></div>
-      <nav class="nav-links">
-        <a href="#about">O mně</a>
-        <a href="#sluzby">Služby</a>
-        <a href="#vyzkum">R&amp;D</a>
-        <a href="#expertise">Expertiza</a>
-        <a href="#projects">Projekty</a>
-        <a href="#public-procurers">Veřejní zadavatelé</a>
-        <a href="#experience">Praxe</a>
-        <a href="#outputs">Výstupy</a>
-        <a href="#contact">Kontakt</a>
-      </nav>
-      <div class="language-switch" aria-label="Language switch">
-        <a href="index.html"><span class="flag">🇬🇧</span><span>EN</span></a>
-        <a class="active" href="cs.html"><span class="flag">🇨🇿</span><span>CS</span></a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="cs.html">Zdeněk <span>Fulka</span></a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <a class="primary" href="#sluzby">Služby</a>
+      <a href="#vyzkum">R&amp;D</a>
+      <a href="#proc">Proč já</a>
+      <a href="#opravneni">Oprávnění</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="lang"><a href="index.html">GB&nbsp;EN</a><a class="active" href="cs.html">CZ&nbsp;CS</a></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="kicker">Dopravní infrastruktura · BIM · udržitelnost</div>
+      <h1>Prémiová technická podpora pro infrastrukturní rozhodnutí.</h1>
+      <p class="lead">Pomáhám veřejným zadavatelům, projektantům, zhotovitelům a výzkumným konsorciím převádět složitá technická, BIM, uhlíková a asset data do obhajitelných rozhodnutí.</p>
+      <p class="value-line">Seniorní externí expertiza pro organizace, které potřebují specializovanou kapacitu bez budování interního týmu nebo nákupu velkého konzultačního balíku.</p>
+      <div class="actions">
+        <a class="btn primary" href="#sluzby">Zobrazit služby</a>
+        <a class="btn light" href="rozhodovaci-podpora-infrastruktury.html">Detail nabídky</a>
+        <a class="btn" href="mailto:fulka@outlook.cz?subject=Premiove%20konzultacni%20sluzby%20pro%20infrastrukturu">Poptat konzultaci</a>
       </div>
     </div>
-  </header>
+    <aside class="profile">
+      <div class="profile-photo"><a href="assets/profile-full.png" target="_blank" rel="noopener"><img src="assets/profile.jpg" alt="Profilová fotografie Zdeňka Fulky"/></a></div>
+      <h2>Zdeněk Fulka</h2>
+      <p>Dekarbonizace infrastruktury · BIM · digitální transformace · cirkulární ekonomika · EU R&amp;D projekty</p>
+    </aside>
+  </div>
+</section>
 
-  <section class="hero">
-    <div class="hero-inner">
+<main>
+  <section class="section" id="sluzby">
+    <div class="section-head">
+      <div><div class="mini">Služby</div><h2>Konzultační balíčky s vysokou přidanou hodnotou</h2></div>
+      <a class="btn light" href="rozhodovaci-podpora-infrastruktury.html">Otevřít celou nabídku</a>
+    </div>
+    <p class="intro">Jednoduchý vstup, seniorní výstup. Každý balíček míří na použitelný rozhodovací dokument, technickou revizi, datový model nebo podklad pro zadání — ne na obecnou studii.</p>
+    <div class="services">
+      <article class="card">
+        <div class="service-title"><span class="no">1</span><h3>Bridge Asset Check</h3></div>
+        <p>Orientační technická podpora pro mosty, lávky a propustky pro obce, města a správce infrastruktury.</p>
+        <ul><li>před-prohlídka lehkým dronem,</li><li>fotodokumentace viditelných závad,</li><li>stručný technický protokol a doporučení dalšího postupu.</li></ul>
+        <a class="more" href="rozhodovaci-podpora-infrastruktury.html">Detail →</a>
+      </article>
+      <article class="card">
+        <div class="service-title"><span class="no">2</span><h3>Uhlíková a stavební optimalizace</h3></div>
+        <p>Externí specializovaná podpora pro uhlíkovou stopu, ESG, cirkularitu a praktickou optimalizaci návrhu nebo realizace.</p>
+        <ul><li>uhlíkový screening a porovnání variant,</li><li>materiálové a procesní úspory,</li><li>podklady pro zadání a soutěž.</li></ul>
+        <a class="more" href="rozhodovaci-podpora-infrastruktury.html">Detail →</a>
+      </article>
+      <article class="card">
+        <div class="service-title"><span class="no">3</span><h3>BIM z existující dokumentace</h3></div>
+        <p>Převod DWG, PDF nebo starší dokumentace do využitelných BIM / IFC a asset dat.</p>
+        <ul><li>FULL BIM pro detailní modelování,</li><li>FLAT BIM pro úspornou evidenci,</li><li>výměry, atributy a datová struktura.</li></ul>
+        <a class="more" href="rozhodovaci-podpora-infrastruktury.html">Detail →</a>
+      </article>
+      <article class="card">
+        <div class="service-title"><span class="no">4</span><h3>Digital Asset &amp; Decision Framework</h3></div>
+        <p>Datová struktura majetku a rozhodovací matice pro údržbu, investice a priority digitalizace.</p>
+        <ul><li>audit dat a dokumentace,</li><li>minimální asset datová struktura,</li><li>prioritizace podle stavu, rizika, nákladů, uhlíku a provozní důležitosti.</li></ul>
+        <a class="more" href="rozhodovaci-podpora-infrastruktury.html">Detail →</a>
+      </article>
+      <article class="card">
+        <div class="service-title"><span class="no">5</span><h3>R&amp;D podpora výzkumných projektů</h3></div>
+        <p>Technická podpora EU výzkumných projektů, kde je třeba strukturovat udržitelnost, digitalizaci, energetickou flexibilitu a využitelné výsledky.</p>
+        <ul><li>architektura návrhu a WP logika,</li><li>technické texty a deliverables,</li><li>exploitation, uptake a stakeholder pathways.</li></ul>
+        <a class="more" href="vyzkumne-projekty.html">Detail →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="vyzkum">
+    <div class="section-head">
+      <div><div class="mini">R&amp;D</div><h2>Podpora výzkumných projektů</h2></div>
+      <a class="btn light" href="vyzkumne-projekty.html">Otevřít R&amp;D detail</a>
+    </div>
+    <div class="split">
       <div>
-        <div class="kicker">Dopravní infrastruktura · BIM · udržitelnost</div>
-        <h1>Projektové řízení, digitální pracovní postupy a udržitelnost pro komplexní infrastrukturu.</h1>
-        <p>
-          Projektový manažer a výzkumný inženýr s více než 20 lety zkušeností v mostním inženýrství,
-          BIM, datových standardech, digitálních dvojčatech, cirkulární ekonomice a optimalizaci uhlíkové stopy.
-        </p>
-        <div class="hero-tags">
-          <a class="hero-tag" href="#vyzkum" style="border-color:rgba(37,191,212,.48); background:rgba(37,191,212,.13);">R&amp;D podpora</a>
-          <a class="hero-tag" href="#sluzby" style="border-color:rgba(243,109,33,.55); background:rgba(243,109,33,.22);">Služby</a>
-          <a class="hero-tag" href="digitalizace-stavebnictvi.html" target="_blank" rel="noopener">Digitalizace stavebnictví</a>
-          <a class="hero-tag" href="digitalni-dvojcata.html" target="_blank" rel="noopener">Digitální dvojčata</a>
-          <a class="hero-tag" href="cirkularita.html" target="_blank" rel="noopener">Cirkularita</a>
-          <a class="hero-tag" href="optimalizace-industry-procesu.html" target="_blank" rel="noopener">Optimalizace Industry procesů</a>
-          <a class="hero-tag" href="phd-cvut.html" target="_blank" rel="noopener">PhD studium ČVUT</a>
-        <a class="hero-tag" href="rozhodovaci-podpora-infrastruktury.html">Rozhodovací podpora infrastruktury</a>
-        </div>
-        <div class="hero-topic-note">Kliknutím na oblast otevřeš samostatnou tematickou stránku s obrázky, detaily a dokumenty ke stažení.</div>
+        <p class="intro">Mohu podporovat výzkumné a inovační projekty podobné RECONMATIC, FlexRICAN a aktuálně připravovanému konsorciálnímu návrhu RI-SPOND: od technického konceptu a logiky work packages po demonstrátory, digitální nástroje, rozhodovací podporu a exploataci výsledků.</p>
+        <p>Současný R&amp;D kontext zahrnuje spolupráci v evropském konsorciálním prostředí s organizacemi jako ELI ERIC, CERN, CNRS, EMFL, HFML-FELIX, HZDR, Oxford, University of Manchester, IBM, Energy Pool, ELI ALPS a POLPUR.</p>
       </div>
-      <div class="hero-panel">
-        <div class="label">Aktuální zaměření</div>
-        <strong>ELI ERIC · FlexRICAN · ČVUT</strong>
-        <p>
-          Výzkum a implementace v oblasti optimalizace energetického řetězce, BESS a resilience, odhadu obnovitelných zdrojů při scénářích změny klimatu a developerského projektu Toola pro lepší pre-feasibility optimalizaci komplexních energetických systémů.
-        </p>
+      <div class="card">
+        <h3>Typické R&amp;D výstupy</h3>
+        <ul>
+          <li>technický koncept a proposal text,</li>
+          <li>WP / task / deliverable struktura,</li>
+          <li>text k digitalizaci a rozhodovací podpoře,</li>
+          <li>exploitation a uptake logika,</li>
+          <li>guidelines, training a stakeholder materiály.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <div class="page">
-    <div class="layout">
-      <aside class="sidebar">
-        <div class="sidebar-top">
-          <div class="profile-frame">
-            <a href="assets/profile-full.png" target="_blank" rel="noopener" title="Open profile photo in full size">
-              <img src="assets/profile.jpg" alt="Profile photo of Zdeněk Fulka" onerror="this.onerror=null;this.src='assets/profile-placeholder.svg';" />
-            </a>
-          </div>
-          <h2>Zdeněk Fulka</h2>
-          <div class="role">Poradce pro dekarbonizaci infrastruktury | ESG a uhlíková strategie | BIM a digitální transformace | Energetické systémy a cirkulární ekonomika | Evropské výzkumné projekty.</div>
-          <div class="location">Liberec / Praha, Česká republika</div>
-          <div class="summary">
-            Projektový manažer, inženýr digitální infrastruktury a výzkumník zaměřený na standardizaci,
-            digitalizaci, cirkulární ekonomiku a udržitelné dodávání infrastrukturních aktiv.
-          </div>
-
-          <div class="summary business-summary">
-            <strong>Ing. Zdeněk Fulka</strong><br>
-            Malá 543, Liberec, 463 12<br>
-            <a href="tel:+420722659255">+420 722 659 255</a><br>
-            <a href="mailto:fulka@outlook.cz">fulka@outlook.cz</a>
-          </div>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="1.CV_Fulka_ENG.pdf">Stáhnout CV</a>
-            <a class="btn btn-secondary" href="mailto:fulka@outlook.cz">E-mail</a>
-            <a class="btn btn-secondary" href="bridge-inspection-authorisation-173-2015.pdf">Oprávnění k prohlídkám mostů</a>
-            <a class="btn btn-secondary" href="buildingsmart-foundation-basic-zdenek-fulka.pdf">Certifikace buildingSMART</a>
-            <a class="btn btn-secondary" href="podpora-verejnych-zadavatelu.pdf">Nabídka pro zadavatele</a>
-          </div>
-        </div>
-        <ul class="side-list">
-          <li><a href="#about"><span>O mně</span><span>→</span></a></li>
-          <li><a href="#sluzby"><span>Služby</span><span>→</span></a></li>
-          <li><a href="#vyzkum"><span>R&amp;D podpora</span><span>→</span></a></li>
-          <li><a href="#expertise"><span>Hlavní oblasti</span><span>→</span></a></li>
-          <li><a href="#projects"><span>Vybrané projekty</span><span>→</span></a></li>
-          <li><a href="#experience"><span>Experience</span><span>→</span></a></li>
-          <li><a href="#outputs"><span>Publikace a prezentace</span><span>→</span></a></li>
-          <li><a href="#contact"><span>Kontakt</span><span>→</span></a></li>
-          <li><a href="https://www.linkedin.com/in/zdenek-fulka-3624731ba" target="_blank" rel="noopener"><span>LinkedIn</span><span>↗</span></a></li>
-          <li><a href="https://github.com/zfulka" target="_blank" rel="noopener"><span>GitHub</span><span>↗</span></a></li>
-        </ul>
-      </aside>
-
-      <main>
-        <section class="card" id="about">
-          <div class="section-head">
-            <h3>O mně</h3>
-            <div class="mini">Profesní profil</div>
-          </div>
-          <p class="lead">
-            Pomáhám infrastrukturním a výzkumným organizacím využívat BIM, strukturované informace a digitální pracovní postupy ke zlepšení kvality dodání,
-            snížení uhlíkové stopy a nákladů a k podpoře udržitelnějšího rozhodování.
-          </p>
-          <p>
-            Jsem projektový manažer s více než 20 lety zkušeností s dodávkou komplexních technických a výzkumných projektů,
-            se silným zaměřením na optimalizaci procesů a pracovní postupy snižující uhlík a náklady prostřednictvím standardizace a digitalizace.
-            Moje práce propojuje projektové řízení, BIM, grafické a datové modely, integraci API / IFC / IDS, mostní inženýrství a hodnocení udržitelnosti.
-          </p>
-          <p>
-            Moje současná práce zahrnuje dopravní i výzkumnou infrastrukturu: od digitálních standardů a informačního managementu podle EN ISO 19650 přes cirkulární ekonomiku,
-            snižování stavebního a demoličního odpadu až po optimalizaci energetického řetězce velkých vědeckých zařízení.
-          </p>
-          <div class="stats">
-            <div class="stat"><strong>20+</strong><span>let praxe</span></div>
-            <div class="stat"><strong>2</strong><span>aktivní projekty Horizon Europe</span></div>
-            <div class="stat"><strong>WP4 / WP7</strong><span>vedení ve FlexRICAN</span></div>
-            <div class="stat"><strong>173/2015</strong><span>oprávnění mostního prohlídkáře</span></div>
-          </div>
-        </section>
-
-        
-        <section class="card" id="sluzby">
-          <div class="section-head">
-            <h3>Služby</h3>
-            <div class="mini">Konzultační balíčky</div>
-          </div>
-          <p class="lead">
-            Praktické služby rozhodovací podpory pro veřejné zadavatele, projektanty a zhotovitele, kteří potřebují specializovanou expertizu v konkrétní fázi projektu bez nutnosti vytvářet trvalý interní tým.
-          </p>
-          <div class="grid-2" style="margin-top:16px;">
-            <article class="tile">
-              <h4>Bridge Asset Check</h4>
-              <p>Před-prohlídky mostů, lávek a propustků s využitím lehkého dronu, fotodokumentace, technický protokol a doporučení dalšího postupu.</p>
-            </article>
-            <article class="tile">
-              <h4>Uhlíková a stavební optimalizace</h4>
-              <p>Uhlíkový screening, porovnání variant a praktická optimalizace návrhu, materiálů, dopravy a stavebních procesů.</p>
-            </article>
-            <article class="tile">
-              <h4>BIM z existující dokumentace</h4>
-              <p>Převod DWG, PDF nebo starší dokumentace do FULL BIM nebo úsporného FLAT BIM podle účelu a rozpočtu.</p>
-            </article>
-            <article class="tile">
-              <h4>Digital Asset & Decision Framework</h4>
-              <p>Datová struktura majetku, pasportní logika a rozhodovací matice pro priority oprav, investic a digitalizace.</p>
-            </article>
-          </div>
-          <div class="actions" style="margin-top:18px;">
-            <a class="btn btn-primary" href="rozhodovaci-podpora-infrastruktury.html">Detail nabídky služeb</a>
-            <a class="btn btn-secondary" href="mailto:fulka@outlook.cz?subject=Konzultacni%20sluzby%20pro%20infrastrukturu">Poptat konzultaci</a>
-          </div>
-        </section>
-
-
-        <section class="card" id="vyzkum">
-          <div class="section-head">
-            <h3>R&amp;D podpora výzkumných projektů</h3>
-            <div class="mini">EU výzkum · technická koordinace · exploatace výsledků</div>
-          </div>
-          <p class="lead">
-            Podporuji výzkumné a inovační projekty tam, kde je třeba propojit technickou infrastrukturu,
-            udržitelnost, BIM/datové modely, energetickou flexibilitu a digitální rozhodovací nástroje do jasných
-            work packages, deliverables, demonstrátorů a využitelných výsledků.
-          </p>
-          <div class="grid-3" style="margin-top:16px;">
-            <article class="tile">
-              <h4>RECONMATIC</h4>
-              <p>Stavební a demoliční odpady, cirkulární workflow, modelování materiálových toků a digitální datové struktury pro recovery, reuse a recycling.</p>
-            </article>
-            <article class="tile">
-              <h4>FlexRICAN</h4>
-              <p>Optimalizace energetického řetězce, BESS, plánování resilience, odhad obnovitelných zdrojů a rozhodovací podpora pro výzkumné infrastruktury.</p>
-            </article>
-            <article class="tile">
-              <h4>RI-SPOND</h4>
-              <p>Připravovaný R&amp;D koncept propojující udržitelnost RI, ORLCA/AESA metodiky, energetickou flexibilitu, Data Lakehouse, federovanou AI, digitální dvojčata a preskriptivní údržbu.</p>
-            </article>
-          </div>
-          <p style="margin-top:16px;">
-            Současná a připravovaná R&amp;D práce probíhá v evropském konsorciálním prostředí se zapojením předních
-            výzkumných infrastruktur a organizací, například ELI ERIC, CERN, CNRS, EMFL, HFML-FELIX, HZDR,
-            Oxford, University of Manchester, IBM a Energy Pool.
-          </p>
-          <div class="actions" style="margin-top:18px;">
-            <a class="btn btn-primary" href="vyzkumne-projekty.html">Detail R&amp;D projektů</a>
-            <a class="btn btn-secondary" href="mailto:fulka@outlook.cz?subject=R%26D%20podpora%20vyzkumnych%20projektu">Poptat R&amp;D podporu</a>
-          </div>
-        </section>
-
-<section class="card" id="expertise">
-          <div class="section-head">
-            <h3>Hlavní oblasti</h3>
-            <div class="mini">Odborné zaměření</div>
-          </div>
-          <div class="chips" role="tablist" aria-label="Hlavní oblasti">
-            <button class="chip active" type="button" data-topic="project" role="tab" aria-selected="true">Projektové řízení</button>
-            <button class="chip" type="button" data-topic="bim" role="tab" aria-selected="false">VDC / BIM / digitální dvojčata</button>
-            <button class="chip" type="button" data-topic="models" role="tab" aria-selected="false">Grafické a datové modely</button>
-            <button class="chip" type="button" data-topic="api" role="tab" aria-selected="false">API / IFC / IDS</button>
-            <button class="chip" type="button" data-topic="bridges" role="tab" aria-selected="false">Mostní inženýrství</button>
-            <button class="chip" type="button" data-topic="transport" role="tab" aria-selected="false">Dopravní infrastruktura</button>
-            <button class="chip" type="button" data-topic="carbon" role="tab" aria-selected="false">Hodnocení uhlíkové stopy</button>
-            <button class="chip" type="button" data-topic="circular" role="tab" aria-selected="false">Cirkulární ekonomika</button>
-            <button class="chip" type="button" data-topic="material" role="tab" aria-selected="false">Analýza materiálových toků</button>
-            <button class="chip" type="button" data-topic="dpp" role="tab" aria-selected="false">DPP</button>
-            <button class="chip" type="button" data-topic="research" role="tab" aria-selected="false">Výzkumná infrastruktura sustainability</button>
-            <button class="chip" type="button" data-topic="energy" role="tab" aria-selected="false">Energetická flexibilita / FVE / vítr / BESS</button>
-          </div>
-
-          <div class="expertise-detail" id="expertise-detail" role="tabpanel" aria-live="polite">
-            <div class="expertise-copy">
-              <h4 id="expertise-title">Projektové řízení</h4>
-              <p id="expertise-text">
-                Vedu mezioborové technické a výzkumné úkoly s odpovědností za rozpočet, harmonogram, zajištění kvality a řízení rizik. Moje práce propojuje inženýrské dodání s digitalizací a výsledky v oblasti udržitelnosti.
-              </p>
-              <ul id="expertise-bullets">
-                <li>Koordinace projekčních, výzkumných a implementačních týmů.</li>
-                <li>Kontrola dodání úkolů, rizik, milníků a QA/QC.</li>
-                <li>Převod technických cílů do praktických pracovních postupů.</li>
-              </ul>
-              <div class="expertise-hint">Klikni na další oblast výše a zobrazí se související popis práce.</div>
-            </div>
-            <div class="expertise-visual" id="expertise-visual" aria-hidden="true"></div>
-          </div>
-        </section>
-
-        <section class="card" id="projects">
-          <div class="section-head">
-            <h3>Vybrané projekty a témata</h3>
-            <div class="mini">Klíčová práce</div>
-          </div>
-
-          <div class="grid-2" role="tablist" aria-label="Vybrané projekty">
-            <article class="tile project-card active" data-project="flexrican" style="--project-image: url('https://flexrican.eu/wp-content/uploads/2024/10/IMG_6034-1024x768.jpg');">
-              <button type="button" aria-selected="true">
-                <div class="project-image">
-                  <span class="project-badge">FlexRICAN</span>
-                </div>
-                <div class="project-card-body">
-                  <h4>FlexRICAN</h4>
-                  <p>Optimalizace energetického řetězce, odhady obnovitelných zdrojů a flexibilita výzkumné infrastruktury.</p>
-                </div>
-              </button>
-            </article>
-
-            <article class="tile project-card" data-project="reconmatic" style="--project-image: url('https://static.wixstatic.com/media/a2313d_a395e9e7686f42d2b9554e0c96147fea~mv2.jpg/v1/crop/x_797%2Cy_0%2Cw_843%2Ch_1093/fill/w_310%2Ch_402%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/DIMS-Cover.jpg');">
-              <button type="button" aria-selected="false">
-                <div class="project-image">
-                  <span class="project-badge">RECONMATIC</span>
-                </div>
-                <div class="project-card-body">
-                  <h4>RECONMATIC</h4>
-                  <p>Digitální nástroje, přenos informací z BIM do produktových dat a snižování stavebního odpadu.</p>
-                </div>
-              </button>
-            </article>
-
-            <article class="tile project-card" data-project="datastandards" style="--project-image: url('assets/data-standards-concept.png');">
-              <button type="button" aria-selected="false">
-                <div class="project-image">
-                  <span class="project-badge">Datové standardy</span>
-                </div>
-                <div class="project-card-body">
-                  <h4>Datové standardy dopravní infrastruktury</h4>
-                  <p>EIR, AIR, CDE pracovní postupy a standardizované požadavky na digitální dodání.</p>
-                </div>
-              </button>
-            </article>
-
-            <article class="tile project-card" data-project="carbon" style="--project-image: url('assets/carbon-delivery-concept.png');">
-              <button type="button" aria-selected="false">
-                <div class="project-image">
-                  <span class="project-badge">Uhlíkové dodání</span>
-                </div>
-                <div class="project-card-body">
-                  <h4>Uhlíkově odpovědné dodání</h4>
-                  <p>Metody propojující návrh, výměry, volbu materiálů, snižování uhlíku a nákladů.</p>
-                </div>
-              </button>
-            </article>
-          </div>
-
-          <div class="project-detail" id="project-detail" aria-live="polite">
-            <div class="project-detail-image" id="project-detail-image">
-              <img class="project-detail-logo" id="project-detail-logo" alt="" />
-            </div>
-            <div class="project-detail-copy">
-              <h4 id="project-title">FlexRICAN</h4>
-              <p id="project-text">
-                Vývoj digitálních metod rozhodovací podpory pro výzkumné infrastruktury se zaměřením na optimalizaci energetického řetězce, energetickou flexibilitu, hodnocení výroby z FVE a větru a snižování uhlíku a nákladů.
-              </p>
-              <div class="project-topic-pills" id="project-topics">
-                <span class="topic-pill">Výzkumná infrastruktura</span>
-                <span class="topic-pill">Energetická flexibilita</span>
-                <span class="topic-pill">FVE a vítr</span>
-                <span class="topic-pill">Uhlík a náklady</span>
-              </div>
-              <ul id="project-bullets">
-                <li>Optimalizace energetického řetězce pro velké výzkumné infrastruktury.</li>
-                <li>Odhad výroby z FVE a větru při scénářích změny klimatu.</li>
-                <li>Podpora energetické flexibility, odolnosti a snižování uhlíku.</li>
-              </ul>
-              <div class="project-links" id="project-links"></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="card" id="experience">
-          <div class="section-head">
-            <h3>Vybraná praxe</h3>
-            <div class="mini">Profesní historie</div>
-          </div>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="time">IX.2025 – today</div>
-              <div class="job">
-                <h4>Výzkumný inženýr / inženýr digitální infrastruktury</h4>
-                <div class="org">The Extreme Light Infrastructure ELI ERIC, Dolní Břežany</div>
-                <p>Projekt FlexRICAN; odpovědnost za optimalizaci energetického řetězce, vývoj nástroje pro odhad výroby z větru a odhad účinnosti fotovoltaiky při projekčních modelech změny klimatu; digitální infrastruktura, BIM a digitální dvojčata, energetická flexibilita a témata uhlíku / LCA.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="time">III.2023 – today</div>
-              <div class="job">
-                <h4>Doktorand / výzkumník</h4>
-                <div class="org">České vysoké učení technické v Praze · Fakulta stavební · Katedra silničních staveb</div>
-                <p>Doktorské studium ve studijním programu <strong>Konstrukce a dopravní stavby</strong> pod vedením doc. Ing. Jana Valentina, Ph.D. Dizertační práce je zaměřena na oběhové hospodářství v dopravní infrastruktuře: BIM jako datovou páteř materiálového pasu, predikci stavebního odpadu z demolic a vyhodnocení uhlíkové stopy / Whole Life Carbon.</p>
-                <p style="margin-top:10px;"><a class="btn btn-secondary" href="phd-cvut.html" target="_blank" rel="noopener">Otevřít PhD téma</a></p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="time">IX.2024 – IX.2025</div>
-              <div class="job">
-                <h4>BIM specialista / koordinátor</h4>
-                <div class="org">Ředitelství silnic a dálnic ČR (ŘSD)</div>
-                <p>Vedení digitalizace v projektové přípravě a interních procesech; příprava interních datových standardů a EPD a EIR/AIR podle EN ISO 19650; účast na projektu sledování uhlíkové stopy Scope 3.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="time">V.2022 – IV.2024</div>
-              <div class="job">
-                <h4>BIM specialista – útvar strategie a inovací</h4>
-                <div class="org">STRABAG a.s., Praha</div>
-                <p>Pilotování metod výstavby snižujících uhlík a náklady, procesní analýzy, BIM koordinace, digitalizace, vývoj datových standardů, hodnocení CO₂ a integrace principů cirkulární ekonomiky do stavebních procesů.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="time">VIII.2009 – IV.2022</div>
-              <div class="job">
-                <h4>Vedoucí BIM technologií / BIM manažer</h4>
-                <div class="org">Valbek spol. s r.o., Liberec</div>
-                <p>Vývoj a implementace BIM pracovních postupů, BEP, 3D modelování, modelování mostních konstrukcí v Revit/Civil 3D, spolupráce v CDE a mezioborová koordinace pilotních projektů.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="time">VII.2006 – VII.2009</div>
-              <div class="job">
-                <h4>Junior Engineer / CAD Associate / BIM Modeller</h4>
-                <div class="org">Parsons Brinckerhoff Ltd., Manchester</div>
-                <p>Studie proveditelnosti, tendrová dokumentace a podrobný návrh; práce pro Network Rail, kontroly návrhu CAT 2 a zavádění raných BIM procesů v mezioborovém prostředí.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-        <section class="card" id="public-procurers">
-          <div class="section-head">
-            <h3>Podpora veřejných zadavatelů</h3>
-            <div class="mini">Mosty · evidence · prohlídky · údržba</div>
-          </div>
-          <p class="lead">
-            Praktická podpora pro obce, města, kraje a správce komunikací při správě mostů, lávek a propustků - od evidence a prohlídek po plán údržby a technické podklady pro veřejné zakázky.
-          </p>
-          <div class="grid-2">
-            <article class="tile">
-              <h4>Mostní agenda a evidence</h4>
-              <p>Konsolidace mostní evidence, mostních listů a strukturovaných informací o objektech, včetně výstupů vhodných pro BMS nebo interní evidenci správce.</p>
-            </article>
-            <article class="tile">
-              <h4>Oprávněné prohlídky</h4>
-              <p>Běžné, hlavní, první hlavní, mimořádné, kontrolní a technické prohlídky mostních objektů pozemních komunikací včetně fotodokumentace a klasifikace závad.</p>
-            </article>
-            <article class="tile">
-              <h4>Plán údržby a rozpočty</h4>
-              <p>Návrh opatření, prioritizace zásahů a orientační odhady nákladů pro plánování údržby, oprav a investic vlastníka komunikace.</p>
-            </article>
-            <article class="tile">
-              <h4>Zadávací a digitální výstupy</h4>
-              <p>Konsolidované technické podklady, jednoduché datové sady, dronová předběžná rekognoskace a vstupy pro zadávání údržby a oprav.</p>
-            </article>
-          </div>
-          <div class="project-links" style="margin-top:18px;">
-            <a href="podpora-verejnych-zadavatelu.pdf">Stáhnout nabídku podpory pro veřejné zadavatele</a>
-            <a href="bridge-inspection-authorisation-173-2015.pdf">Stáhnout oprávnění k prohlídkám</a>
-            <a href="buildingsmart-foundation-basic-zdenek-fulka.pdf">Stáhnout certifikaci buildingSMART</a>
-          </div>
-        </section>
-
-        <section class="card" id="certifications">
-          <div class="section-head">
-            <h3>Certifikace a dokumenty ke stažení</h3>
-            <div class="mini">Dokumenty</div>
-          </div>
-          <div class="grid-3">
-            <article class="tile">
-              <h4>buildingSMART Foundation Basic</h4>
-              <p>Profesionální certifikace Foundation Basic potvrzující znalost a porozumění základům openBIM.</p>
-              <p style="margin-top:12px;"><a class="btn btn-secondary" href="buildingsmart-foundation-basic-zdenek-fulka.pdf">Stáhnout certifikát</a></p>
-            </article>
-            <article class="tile">
-              <h4>Oprávnění k prohlídkám mostů</h4>
-              <p>Oprávnění Ministerstva dopravy č. 173/2015 k výkonu prohlídek mostních objektů pozemních komunikací s platností do 31. 12. 2030.</p>
-              <p style="margin-top:12px;"><a class="btn btn-secondary" href="bridge-inspection-authorisation-173-2015.pdf">Stáhnout oprávnění</a></p>
-            </article>
-            <article class="tile">
-              <h4>Nabídka pro veřejné zadavatele</h4>
-              <p>Nabídka pro obce a veřejné vlastníky zahrnující evidenci mostů, prohlídky, plán údržby, digitální výstupy a podporu zadávání.</p>
-              <p style="margin-top:12px;"><a class="btn btn-secondary" href="podpora-verejnych-zadavatelu.pdf">Stáhnout nabídku</a></p>
-            </article>
-          </div>
-        </section>
-
-        <section class="card" id="outputs">
-          <div class="section-head">
-            <h3>Publikace a prezentace</h3>
-            <div class="mini">Vybrané výstupy</div>
-          </div>
-          <div class="grid-2">
-            <article class="tile">
-              <h4>Ekonomické přínosy snižování uhlíkové stopy ve výstavbě dopravní infrastruktury</h4>
-              <p>Publikační aktivita zaměřená na ekonomické efekty a praktické dopady snižování uhlíkové stopy při dodávce infrastruktury.</p>
-            </article>
-            <article class="tile">
-              <h4>BIM-based methods for circular economy and waste mitigation</h4>
-              <p>Výzkum a odborná komunikace digitálních pracovních postupů pro snižování stavebního a demoličního odpadu, řízení životního cyklu a hodnocení udržitelnosti.</p>
-            </article>
-            <article class="tile">
-              <h4>PhD studium na ČVUT: BIM, cirkulární ekonomika a predikce materiálových toků</h4>
-              <p>Doktorské studium na ČVUT v Praze, Fakultě stavební, zaměřené na oběhové hospodářství v dopravní infrastruktuře, BIM materiálové pasy, predikci stavebního a demoličního odpadu a vyhodnocení uhlíkové stopy / Whole Life Carbon.</p>
-              <p style="margin-top:12px;">
-                <a class="btn btn-secondary" href="phd-cvut.html" target="_blank" rel="noopener">Otevřít PhD téma</a>
-                <a class="btn btn-secondary" href="ctu-phd-professional-discussion-study-zdenek-fulka.docx">Stáhnout studii</a>
-              </p>
-            </article>
-            <article class="tile">
-              <h4>Prohlídky a technické hodnocení mostů pozemních komunikací</h4>
-              <p>Profesní prezentace zaměřená na autorizované prohlídky mostů pozemních komunikací: vizuální prohlídku mostních objektů, identifikaci a dokumentaci závad, posouzení stavebního stavu, doporučení údržby nebo další diagnostiky a formální zpracování zpráv pro vlastníky a správce mostů v souladu s ČSN 73 6221 a rámcem oprávnění Ministerstva dopravy. Vhodně využívám drony pro předběžnou rekognoskaci stavu konstrukce a bezpečnější vizuální přehled méně přístupných částí před detailní prohlídkou.</p>
-              <p style="margin-top:12px;"><a class="btn btn-secondary" href="bridge-inspection-authorisation-173-2015.pdf">Stáhnout oprávnění PDF</a></p>
-            </article>
-          </div>
-        </section>
-
-        <section class="card" id="contact">
-          <div class="section-head">
-            <h3>Kontakt a fakturační údaje</h3>
-            <div class="mini">Kontakt</div>
-          </div>
-          <p class="lead">Pro profesní, výzkumnou nebo konzultační spolupráci mě můžeš kontaktovat.</p>
-
-          <div class="grid-3">
-            <article class="tile">
-              <h4>E-mail</h4>
-              <p><a href="mailto:fulka@outlook.cz">fulka@outlook.cz</a></p>
-            </article>
-            <article class="tile">
-              <h4>Telefon</h4>
-              <p><a href="tel:+420722659255">+420 722 659 255</a></p>
-            </article>
-            <article class="tile">
-              <h4>LinkedIn</h4>
-              <p><a href="https://www.linkedin.com/in/zdenek-fulka-3624731ba" target="_blank" rel="noopener">zdenek-fulka-3624731ba</a></p>
-            </article>
-          </div>
-
-          <div class="tile" style="margin-top:16px;">
-            <h4>Podnikatelské a fakturační údaje</h4>
-            <div class="detail-list">
-              <div class="detail-row">
-                <div class="detail-label">Jméno</div>
-                <div class="detail-value">Ing. Zdeněk Fulka</div>
-              </div>
-              <div class="detail-row">
-                <div class="detail-label">Adresa</div>
-                <div class="detail-value">Malá 543, Liberec, 463 12, Česká republika</div>
-              </div>
-              <div class="detail-row">
-                <div class="detail-label">IČO</div>
-                <div class="detail-value">14324172</div>
-              </div>
-              <div class="detail-row">
-                <div class="detail-label">Číslo účtu</div>
-                <div class="detail-value">103467068/2250</div>
-              </div>
-              <div class="detail-row">
-                <div class="detail-label">Datová schránka</div>
-                <div class="detail-value">4wxtj7b</div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+  <section class="section" id="proc">
+    <div class="section-head"><div><div class="mini">Proč externí specialista</div><h2>Seniorní expertiza bez režie velkého týmu</h2></div></div>
+    <div class="split">
+      <div class="card"><h3>Obchodní hodnota</h3><p>Pomáhám předcházet drahým pozdním opravám, slabým zadávacím podmínkám, nepoužitelným BIM datům, neobhajitelným uhlíkovým tvrzením a roztříštěnému technickému rozhodování.</p></div>
+      <div class="card"><h3>Šířka odbornosti</h3><p>Mosty, BIM, digitální dvojčata, asset data, uhlíková stopa, cirkulární materiálové toky, energetické systémy a EU výzkumné projekty v jednom poradenském profilu.</p></div>
     </div>
-  </div>
+  </section>
 
-  <footer class="footer">
-    © 2026 Zdeněk Fulka · Osobní web hostovaný na GitHub Pages.
-  </footer>
+  <section class="section" id="expertiza">
+    <div class="section-head"><div><div class="mini">Expertiza</div><h2>Odborné zázemí</h2></div></div>
+    <div class="badges">
+      <a class="badge" href="digitalizace-stavebnictvi.html">Digitalizace stavebnictví</a>
+      <a class="badge" href="digitalni-dvojcata.html">Digitální dvojčata</a>
+      <a class="badge" href="cirkularita.html">Cirkularita</a>
+      <a class="badge" href="optimalizace-industry-procesu.html">Optimalizace Industry procesů</a>
+      <a class="badge" href="phd-cvut.html">PhD studium ČVUT</a>
+    </div>
+  </section>
 
-  <script>
-    const expertiseData = {
-      project: {
-        title: "Projektové řízení",
-        text: "Vedu mezioborové technické a výzkumné úkoly s odpovědností za rozpočet, harmonogram, zajištění kvality a řízení rizik. Moje práce propojuje inženýrské dodání s digitalizací a výsledky v oblasti udržitelnosti.",
-        bullets: [
-          "Koordinace projekčních, výzkumných a implementačních týmů.",
-          "Kontrola dodání úkolů, rizik, milníků a QA/QC.",
-          "Převod technických cílů do praktických pracovních postupů."
-        ],
-        visual: "timeline"
-      },
-      bim: {
-        title: "VDC / BIM / digitální dvojčata",
-        text: "Vyvíjím a koordinuji BIM pracovní postupy propojující grafické modely, strukturovaná data, prostředí CDE a potřeby správy aktiv. Cílem není modelování samo o sobě, ale lepší rozhodování v životním cyklu infrastruktury.",
-        bullets: [
-          "BEP, CDE pracovní postupy a BIM koordinace.",
-          "Digitální dvojčata a strukturované informace o aktivech.",
-          "Implementace BIM v projektové přípravě a dodání."
-        ],
-        visual: "digitalTwin"
-      },
-      models: {
-        title: "Grafické a datové modely",
-        text: "Pracuji s vazbou mezi geometrií, klasifikací, informačními požadavky a strukturovanými datovými sadami. Součástí je využití modelových dat pro výměry, materiálové toků, environmentální hodnocení a navazující automatizaci.",
-        bullets: [
-          "Výměry založené na modelu a strukturované atributy aktiv.",
-          "Kontroly konzistence mezi grafickým a datovým modelem.",
-          "Příprava dat vhodných pro automatizaci a analytiku."
-        ],
-        visual: "models"
-      },
-      api: {
-        title: "Integrace API / IFC / IDS",
-        text: "Zaměřuji se na interoperabilitu: IFC, IDS, API a pracovní postupy výměny dat, které umožňují přenos informací mezi BIM nástroji, databázemi a analytickými aplikacemi bez ručního přepracování.",
-        bullets: [
-          "Výměna informací založená na IFC a validační logika.",
-          "Pracovní postupy řízené IDS a informačními požadavky.",
-          "Procesní integrace a automatizace založená na API."
-        ],
-        visual: "api"
-      },
-      bridges: {
-        title: "Mostní inženýrství",
-        text: "Moje odborné zázemí je v projektování mostů, modelování, prohlídkách a technické koordinaci. Tento inženýrský základ mi pomáhá držet BIM a udržitelnost v realistickém kontextu skutečné dodávky infrastruktury.",
-        bullets: [
-          "Návrh mostů a mezioborová koordinace.",
-          "Prohlídky mostů a technické hodnocení.",
-          "Digitální evidence konstrukcí a informace pro správce aktiv."
-        ],
-        visual: "bridge"
-      },
-      transport: {
-        title: "Dopravní infrastruktura",
-        text: "Aplikuji metody digitalizace a udržitelnosti v prostředí silniční a dopravní infrastruktury, včetně projektové přípravy, datových standardů, zadávacích požadavků a správy informací o aktivech.",
-        bullets: [
-          "BIM požadavky pro dopravní infrastrukturu.",
-          "Projektová příprava a informační potřeby vlastníka.",
-          "Standardy digitálního dodání pro veřejnou infrastrukturu."
-        ],
-        visual: "transport"
-      },
-      carbon: {
-        title: "Hodnocení uhlíkové stopy",
-        text: "Propojuji projektová rozhodnutí, materiálové výměry a uvažování v životním cyklu s hodnocením uhlíkové stopy. Cílem je určit, kde mohou inženýrská rozhodnutí snížit emise bez ztráty technické funkčnosti.",
-        bullets: [
-          "Hodnocení CO₂ z materiálových a výměrových dat.",
-          "Scope 3 a pracovní postupy sledování uhlíku v infrastruktuře.",
-          "Propojení optimalizace návrhu se snižováním uhlíku a nákladů."
-        ],
-        visual: "carbon"
-      },
-      circular: {
-        title: "Cirkulární ekonomika",
-        text: "Pracuji na praktických aplikacích cirkulární ekonomiky ve stavebnictví a infrastruktuře: na snižování odpadu, zvyšování materiálové efektivity a přípravě digitálních informací pro rozhodování o opětovném použití, recyklaci a využití.",
-        bullets: [
-          "Principy cirkulární ekonomiky pro infrastrukturní aktiva.",
-          "Snižování stavebního a demoličního odpadu.",
-          "Informační podpora pro potenciál opětovného použití a využití."
-        ],
-        visual: "circular"
-      },
-      material: {
-        title: "Analýza materiálových toků",
-        text: "Využívám metody založené na BIM a datech pro pochopení materiálových toků napříč životním cyklem aktiva. To podporuje predikci odpadu, plánování využití materiálů a porovnání variant návrhu.",
-        bullets: [
-          "Materiálové výměry a mapování toků.",
-          "Predikce budoucího stavebního a demoličního odpadu.",
-          "Datové struktury pro cirkulární řízení materiálů."
-        ],
-        visual: "material"
-      },
-      dpp: {
-        title: "Digitální produktový pas",
-        text: "Pracuji s konceptem DPP pro stavební výrobky a aktiva, včetně přenosu informací založeného na GTIN, identifikace produktů a vazby mezi prvky BIM a fyzickými výrobky.",
-        bullets: [
-          "Metodika založená na GTIN a identifikace produktů.",
-          "Přenos informací z BIM do produktových dat.",
-          "Podpora sledovatelnosti a datových sad pro cirkulární ekonomiku."
-        ],
-        visual: "passport"
-      },
-      research: {
-        title: "Udržitelnost výzkumné infrastruktury",
-        text: "V projektech výzkumné infrastruktury se zaměřuji na rozhraní mezi provozem budov, energetickou náročností, daty o aktivech, hodnocením udržitelnosti a digitálními nástroji rozhodovací podpory.",
-        bullets: [
-          "Metody udržitelnosti pro velká výzkumná zařízení.",
-          "Digitální nástroje podporující rozhodování o budovách a aktivech.",
-          "Koordinace mezi výzkumnými úkoly a praktickou implementací."
-        ],
-        visual: "research"
-      },
-      energy: {
-        title: "Energetická flexibilita / FVE / vítr / BESS",
-        text: "Pracuji na digitálních metodách rozhodovací podpory pro optimalizaci energetického řetězce, odhad výroby z obnovitelných zdrojů a plánování bateriových úložišť při scénářích projekce změny klimatu.",
-        bullets: [
-          "Odhad výroby z FVE a větru při klimatických projekcích.",
-          "Hodnocení bateriových úložišť a energetické flexibility.",
-          "Optimalizace nákladů a uhlíku pro velká vědecká zařízení."
-        ],
-        visual: "energy"
-      }
-    };
+  <section class="section" id="opravneni">
+    <div class="section-head"><div><div class="mini">Oprávnění</div><h2>Důvěryhodnost</h2></div></div>
+    <div class="docs">
+      <article class="card"><h3>Oprávnění k prohlídkám mostů</h3><p>Oprávnění pro mostní prohlídky a související technickou podporu.</p><a class="more" href="bridge-inspection-authorisation-173-2015.pdf">Stáhnout PDF →</a></article>
+      <article class="card"><h3>buildingSMART Foundation</h3><p>Certifikát potvrzující znalost BIM a openBIM principů.</p><a class="more" href="buildingsmart-foundation-basic-zdenek-fulka.pdf">Stáhnout PDF →</a></article>
+      <article class="card"><h3>Nabídka pro veřejné zadavatele</h3><p>Podkladový dokument pro veřejné zadavatele a vlastníky komunální infrastruktury.</p><a class="more" href="podpora-verejnych-zadavatelu.pdf">Stáhnout PDF →</a></article>
+    </div>
+  </section>
 
-    function expertiseSvg(type) {
-      const common = 'viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg"';
-      const base = {
-        timeline: `<svg ${common}><rect x="32" y="34" width="256" height="152" rx="18" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.28)"/><path d="M78 62v96" stroke="#25bfd4" stroke-width="5" stroke-linecap="round"/><circle cx="78" cy="70" r="12" fill="#f36d21"/><circle cx="78" cy="110" r="12" fill="#25bfd4"/><circle cx="78" cy="150" r="12" fill="#7fb4ff"/><path d="M110 70h116M110 110h86M110 150h132" stroke="white" stroke-opacity=".8" stroke-width="8" stroke-linecap="round"/></svg>`,
-        digitalTwin: `<svg ${common}><circle cx="160" cy="110" r="68" fill="rgba(37,191,212,.14)" stroke="#25bfd4" stroke-width="3"/><path d="M160 46v128M96 110h128M116 66l88 88M204 66l-88 88" stroke="rgba(255,255,255,.55)" stroke-width="2"/><rect x="124" y="74" width="72" height="72" rx="12" fill="rgba(255,255,255,.18)" stroke="white" stroke-opacity=".7"/><path d="M142 110l14 14 28-34" stroke="#f36d21" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-        models: `<svg ${common}><rect x="54" y="48" width="92" height="78" rx="12" fill="rgba(255,255,255,.18)" stroke="#7fb4ff"/><rect x="174" y="82" width="92" height="88" rx="12" fill="rgba(255,255,255,.12)" stroke="#25bfd4"/><path d="M146 88h28M146 112h28M94 126v38h80" stroke="#f36d21" stroke-width="5" stroke-linecap="round"/><circle cx="94" cy="88" r="15" fill="#f36d21"/><circle cx="220" cy="126" r="18" fill="#25bfd4"/></svg>`,
-        api: `<svg ${common}><rect x="34" y="80" width="92" height="64" rx="14" fill="rgba(255,255,255,.16)" stroke="#7fb4ff"/><rect x="194" y="80" width="92" height="64" rx="14" fill="rgba(255,255,255,.16)" stroke="#25bfd4"/><path d="M128 112h64" stroke="#f36d21" stroke-width="7" stroke-linecap="round"/><path d="M172 92l20 20-20 20" stroke="#f36d21" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="120" text-anchor="middle" fill="white" font-size="20" font-weight="700">IFC</text><text x="240" y="120" text-anchor="middle" fill="white" font-size="20" font-weight="700">IDS</text></svg>`,
-        bridge: `<svg ${common}><path d="M40 154h240" stroke="white" stroke-opacity=".75" stroke-width="10" stroke-linecap="round"/><path d="M74 154c22-58 51-86 86-86s64 28 86 86" stroke="#25bfd4" stroke-width="8" stroke-linecap="round"/><path d="M92 154V98M128 154V78M192 154V78M228 154V98" stroke="#f36d21" stroke-width="5" stroke-linecap="round"/></svg>`,
-        transport: `<svg ${common}><path d="M42 158c50-58 107-87 170-87 28 0 49 5 66 14" stroke="rgba(255,255,255,.45)" stroke-width="16" stroke-linecap="round"/><path d="M42 158c50-58 107-87 170-87 28 0 49 5 66 14" stroke="#7fb4ff" stroke-width="6" stroke-linecap="round"/><path d="M82 156h178" stroke="#f36d21" stroke-width="5" stroke-dasharray="16 12" stroke-linecap="round"/><rect x="94" y="74" width="52" height="36" rx="8" fill="rgba(255,255,255,.18)" stroke="#25bfd4"/></svg>`,
-        carbon: `<svg ${common}><circle cx="126" cy="112" r="56" fill="rgba(37,191,212,.15)" stroke="#25bfd4" stroke-width="4"/><path d="M101 116c10 20 39 22 53 3 12-17 2-43-22-45-24-2-42 23-31 42z" fill="rgba(255,255,255,.18)" stroke="white" stroke-opacity=".65"/><path d="M192 148l40-78 40 78h-80z" fill="rgba(243,109,33,.72)"/><text x="232" y="137" text-anchor="middle" fill="white" font-size="28" font-weight="800">CO₂</text></svg>`,
-        circular: `<svg ${common}><path d="M102 72c34-28 82-27 116 1" stroke="#25bfd4" stroke-width="10" stroke-linecap="round"/><path d="M219 73l-2-32 31 10" stroke="#25bfd4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M218 148c-34 28-82 27-116-1" stroke="#f36d21" stroke-width="10" stroke-linecap="round"/><path d="M101 147l2 32-31-10" stroke="#f36d21" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="160" cy="110" r="34" fill="rgba(255,255,255,.16)" stroke="white" stroke-opacity=".65"/></svg>`,
-        material: `<svg ${common}><rect x="52" y="54" width="58" height="58" rx="12" fill="rgba(243,109,33,.78)"/><rect x="132" y="82" width="58" height="58" rx="12" fill="rgba(37,191,212,.76)"/><rect x="212" y="110" width="58" height="58" rx="12" fill="rgba(127,180,255,.76)"/><path d="M110 84h22M190 112h22" stroke="white" stroke-width="7" stroke-linecap="round"/><path d="M120 158c32 22 78 24 120 2" stroke="white" stroke-opacity=".58" stroke-width="5" stroke-linecap="round"/></svg>`,
-        passport: `<svg ${common}><rect x="98" y="42" width="124" height="150" rx="16" fill="rgba(255,255,255,.16)" stroke="#7fb4ff"/><path d="M124 82h72M124 112h72M124 142h46" stroke="white" stroke-opacity=".72" stroke-width="7" stroke-linecap="round"/><rect x="124" y="154" width="72" height="20" rx="4" fill="#f36d21"/><circle cx="200" cy="64" r="20" fill="#25bfd4"/><path d="M190 64l7 7 14-18" stroke="#07121d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-        research: `<svg ${common}><rect x="52" y="132" width="216" height="38" rx="10" fill="rgba(255,255,255,.16)" stroke="white" stroke-opacity=".5"/><path d="M86 132V82M126 132V58M166 132V86M206 132V68M246 132V92" stroke="#25bfd4" stroke-width="8" stroke-linecap="round"/><path d="M76 78h72M154 58h70M194 92h64" stroke="#f36d21" stroke-width="5" stroke-linecap="round"/><circle cx="126" cy="58" r="11" fill="#f36d21"/><circle cx="206" cy="68" r="11" fill="#7fb4ff"/></svg>`,
-        energy: `<svg ${common}><path d="M70 164h180" stroke="white" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/><path d="M96 150l38-88 34 88M168 150l32-70 34 70" stroke="#25bfd4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M98 70h56M188 88h56" stroke="#f36d21" stroke-width="5" stroke-linecap="round"/><circle cx="238" cy="54" r="22" fill="#f36d21"/><path d="M72 100h30l-18 28h28l-40 48 14-38H60l12-38z" fill="rgba(255,255,255,.86)"/></svg>`
-      };
-      return base[type] || base.timeline;
-    }
-
-    function updateExpertise(topic) {
-      const data = expertiseData[topic];
-      if (!data) return;
-      document.querySelectorAll('.chip[data-topic]').forEach(button => {
-        const isActive = button.dataset.topic === topic;
-        button.classList.toggle('active', isActive);
-        button.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      });
-      document.getElementById('expertise-title').textContent = data.title;
-      document.getElementById('expertise-text').textContent = data.text;
-      document.getElementById('expertise-bullets').innerHTML = data.bullets.map(item => `<li>${item}</li>`).join('');
-      document.getElementById('expertise-visual').innerHTML = expertiseSvg(data.visual);
-    }
-
-    document.querySelectorAll('.chip[data-topic]').forEach(button => {
-      button.addEventListener('click', () => updateExpertise(button.dataset.topic));
-    });
-    updateExpertise('project');
-  </script>
-
-
-  <script>
-    const projectData = {
-      flexrican: {
-        title: "FlexRICAN",
-        image: "https://flexrican.eu/wp-content/uploads/2024/10/IMG_6034-1024x768.jpg",
-        logo: "https://flexrican.eu/wp-content/uploads/2024/06/Logo-and-disclaimer-banner-2.png",
-        text: "Ve FlexRICAN pracuji na digitálních metodách rozhodovací podpory pro komplexní energetické systémy se zaměřením na optimalizaci energetického řetězce, BESS a resilience, hodnocení FVE a větrné výroby, snižování uhlíku a nákladů a developerský projekt Toola.",
-        bullets: [
-          "Optimalizace energetického řetězce a rozhodovací pracovní postupy pro komplexní energetické systémy výzkumných infrastruktur.",
-          "Odhad účinnosti FVE a výroby z větru při projekčních modelech změny klimatu.",
-          "Příspěvek k metodikám podporujícím porovnání scénářů BESS, energetickou flexibilitu, resilience a snižování uhlíku."
-        ],
-        topics: ["BESS", "Optimalizace energetického řetězce", "Energetická flexibilita", "FVE a vítr", "Uhlík a náklady"],
-        links: [
-          ["Web FlexRICAN", "https://flexrican.eu/about-flexrican/"],
-          ["FlexRICAN na ELI / běžící projekty", "https://www.eli-laser.eu/projects/running-projects/"]
-        ]
-      },
-      reconmatic: {
-        title: "RECONMATIC",
-        image: "https://static.wixstatic.com/media/a2313d_a395e9e7686f42d2b9554e0c96147fea~mv2.jpg/v1/crop/x_797%2Cy_0%2Cw_843%2Ch_1093/fill/w_310%2Ch_402%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/DIMS-Cover.jpg",
-        logo: "https://static.wixstatic.com/media/613330_d520e0ee2a0441518051bfd29aa402ae~mv2.png/v1/fill/w_179%2Ch_44%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Full%20Colour_White%20Text.png",
-        text: "V RECONMATIC se zaměřuji na implementaci digitálních nástrojů, přenos informací založený na BIM a hodnocení udržitelnosti pro snižování stavebního a demoličního odpadu.",
-        bullets: [
-          "Implementace digitálních nástrojů v demonstračních případech a školicích aktivitách.",
-          "Automatizace přenosu informací z BIM modelů do fyzických produktů s využitím metodiky založené na GTIN.",
-          "Podpora cirkulární výstavby, snižování odpadu a sledovatelnosti materiálů."
-        ],
-        topics: ["BIM a digitální dvojčata", "Cirkulární ekonomika", "Materiálový tok", "DPP"],
-        links: [
-          ["Web RECONMATIC", "https://www.reconmatic.eu/"],
-          ["Záznam projektu CORDIS", "https://cordis.europa.eu/project/id/101058580"]
-        ]
-      },
-      datastandards: {
-        title: "Datové standardy dopravní infrastruktury",
-        image: "assets/data-standards-concept.png",
-        logo: "",
-        text: "Toto téma zahrnuje přípravu a koordinaci požadavků na digitální dodání dopravní infrastruktury, včetně strukturovaných informačních potřeb, pracovních postupů CDE a dokumentace v souladu s EN ISO 19650.",
-        bullets: [
-          "Příprava EIR, AIR, datových standardů a pracovních postupů založených na CDE.",
-          "Převod požadavků vlastníka do praktických procesů digitálního dodání.",
-          "Podpora interní digitalizace v projektové přípravě a správě informací o aktivech."
-        ],
-        topics: ["Dopravní infrastruktura", "Grafické a datové modely", "API / IFC / IDS"],
-        links: []
-      },
-      carbon: {
-        title: "Uhlíkově odpovědné dodání",
-        image: "assets/carbon-delivery-concept.png",
-        logo: "",
-        text: "Toto téma propojuje projektová rozhodnutí, výměry, volbu materiálů a životní cyklus se snižováním uhlíku a nákladů ve stavebních a infrastrukturních pracovních postupech.",
-        bullets: [
-          "Hodnocení příležitostí ke snížení uhlíku z materiálových a výměrových dat.",
-          "Vývoj procesně orientovaných pracovních postupů pro nízkouhlíkové dodání.",
-          "Integrace hodnocení uhlíku s BIM, datovými standardy a uvažováním v cirkulární ekonomice."
-        ],
-        topics: ["Uhlík a LCA", "Cirkulární ekonomika", "Materiálový tok"],
-        links: []
-      }
-    };
-
-    function updateProject(projectKey) {
-      const data = projectData[projectKey];
-      if (!data) return;
-
-      document.querySelectorAll('.project-card').forEach(card => {
-        const active = card.dataset.project === projectKey;
-        card.classList.toggle('active', active);
-        const button = card.querySelector('button');
-        if (button) button.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-
-      const imagePanel = document.getElementById('project-detail-image');
-      const logo = document.getElementById('project-detail-logo');
-
-      if (data.image) {
-        imagePanel.style.setProperty('--project-detail-image', `url('${data.image}')`);
-      } else {
-        imagePanel.style.setProperty('--project-detail-image', "linear-gradient(135deg, #07121d, #17324d 58%, #25bfd4)");
-      }
-
-      if (data.logo) {
-        logo.src = data.logo;
-        logo.alt = `${data.title} visual identity`;
-        logo.style.display = 'block';
-      } else {
-        logo.removeAttribute('src');
-        logo.alt = "";
-        logo.style.display = 'none';
-      }
-
-      document.getElementById('project-title').textContent = data.title;
-      document.getElementById('project-text').textContent = data.text;
-      document.getElementById('project-topics').innerHTML = (data.topics || []).map(item => `<span class="topic-pill">${item}</span>`).join('');
-      document.getElementById('project-bullets').innerHTML = data.bullets.map(item => `<li>${item}</li>`).join('');
-      document.getElementById('project-links').innerHTML = data.links.map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener">${label}</a>`).join('');
-    }
-
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.addEventListener('click', () => updateProject(card.dataset.project));
-    });
-    updateProject('flexrican');
-  </script>
-
+  <section class="section" id="kontakt">
+    <div class="section-head"><div><div class="mini">Kontakt</div><h2>Začněme cílenou konzultací</h2></div></div>
+    <div class="contact">
+      <div>
+        <p class="intro">Pošlete stručný popis objektu, projektu, soutěže nebo R&amp;D návrhu. Navrhnu nejefektivnější rozsah: review, poradenský balíček, rozhodovací matici, BIM/datový převod nebo R&amp;D podporu.</p>
+        <div class="actions"><a class="btn primary" href="mailto:fulka@outlook.cz?subject=Poptavka%20premiove%20konzultace">Poptat konzultaci</a><a class="btn light" href="https://www.linkedin.com/in/zdenek-fulka-3624731ba">LinkedIn</a></div>
+      </div>
+      <div class="contact-lines">
+        <div class="line"><strong>E-mail</strong><a href="mailto:fulka@outlook.cz">fulka@outlook.cz</a></div>
+        <div class="line"><strong>Telefon</strong><a href="tel:+420722659255">+420 722 659 255</a></div>
+        <div class="line"><strong>Web</strong><a href="https://www.fulka.eu">www.fulka.eu</a></div>
+        <div class="line"><strong>IČO</strong><span>14324172</span></div>
+        <div class="line"><strong>Datová schránka</strong><span>4wxtj7b</span></div>
+        <div class="line"><strong>Číslo účtu</strong><span>103467068/2250</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>© 2026 Zdeněk Fulka · Prémiové konzultační služby pro infrastrukturu.</footer>
 </body>
 </html>

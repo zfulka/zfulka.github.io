@@ -1,21 +1,29 @@
-KOMPLETNÍ WEB – PŮVODNÍ DESIGN + SERVICES + R&D
+KOMPLETNÍ WEB – SALES-FIRST, JEDNODUCHÝ, PŮVODNÍ DESIGN
 
-Zachovává původní tmavý design webu.
-Přidáno:
-- Services / Služby jako jasný blok služeb.
-- R&D project support / R&D podpora výzkumných projektů.
-- Nové detailní stránky:
-  rd-project-support.html
-  vyzkumne-projekty.html
+Cíl:
+- zachovat původní tmavý grafický styl,
+- zjednodušit orientaci,
+- orientovat homepage na prodej služeb,
+- monetizovat dosavadní zkušenosti jako seniorní externí expertizu.
 
-R&D sekce uvádí:
-- RECONMATIC
-- FlexRICAN
-- RI-SPOND
-- spolupráci v konsorciálním prostředí s ELI ERIC, CERN, CNRS, EMFL, HFML-FELIX, HZDR, Oxford, University of Manchester, IBM, Energy Pool, ELI ALPS a POLPUR.
+Homepage struktura:
+1. Hero – premium technical advisory
+2. Services / Služby – 5 konzultačních balíčků
+3. R&D – podpora výzkumných projektů
+4. Why me / Proč externí specialista
+5. Expertise / Expertiza
+6. Credentials / Oprávnění
+7. Contact / Kontakt
 
-Postup:
+Detailní podstránky zůstávají:
+- infrastructure-decision-support.html
+- rozhodovaci-podpora-infrastruktury.html
+- rd-project-support.html
+- vyzkumne-projekty.html
+
+Postup nahrání:
 1. ZIP rozbal.
-2. Nahraj celý obsah do kořene repozitáře zfulka.github.io.
-3. Commit changes.
-4. Otevři https://www.fulka.eu a dej Ctrl + F5.
+2. V GitHub repozitáři zfulka.github.io otevři Add file → Upload files.
+3. Nahraj celý rozbalený obsah včetně složky assets.
+4. Potvrď Commit changes.
+5. Otevři https://www.fulka.eu a dej Ctrl + F5.
