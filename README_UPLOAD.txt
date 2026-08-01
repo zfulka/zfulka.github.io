@@ -1,21 +1,21 @@
-KOMPLETNÍ WEB – LIGHT SERVICE-FIRST VERZE
+KOMPLETNÍ WEB – PŮVODNÍ DESIGN + SERVICES + R&D
 
-Tato verze je zjednodušená, vzdušnější a obchodně srozumitelná.
+Zachovává původní tmavý design webu.
+Přidáno:
+- Services / Služby jako jasný blok služeb.
+- R&D project support / R&D podpora výzkumných projektů.
+- Nové detailní stránky:
+  rd-project-support.html
+  vyzkumne-projekty.html
 
-Struktura homepage:
-1. Úvod
-2. Nabízené služby / Services
-3. Odborné zázemí / Expertise
-4. Oprávnění a dokumenty / Credentials
-5. Kontakt / Contact
+R&D sekce uvádí:
+- RECONMATIC
+- FlexRICAN
+- RI-SPOND
+- spolupráci v konsorciálním prostředí s ELI ERIC, CERN, CNRS, EMFL, HFML-FELIX, HZDR, Oxford, University of Manchester, IBM, Energy Pool, ELI ALPS a POLPUR.
 
-Detailní texty služeb zůstávají na samostatných stránkách:
-- rozhodovaci-podpora-infrastruktury.html
-- infrastructure-decision-support.html
-
-Postup nahrání:
+Postup:
 1. ZIP rozbal.
-2. V GitHub repozitáři zfulka.github.io otevři Add file → Upload files.
-3. Nahraj celý rozbalený obsah včetně složky assets.
-4. Potvrď Commit changes.
-5. Otevři https://www.fulka.eu a proveď Ctrl + F5.
+2. Nahraj celý obsah do kořene repozitáře zfulka.github.io.
+3. Commit changes.
+4. Otevři https://www.fulka.eu a dej Ctrl + F5.
