@@ -112,25 +112,31 @@ li { margin: 6px 0; }
 .pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0;
   margin-top: 18px;
+  color: rgba(255,255,255,0.74);
+  font-size: .92rem;
+  font-weight: 700;
+  letter-spacing: .01em;
 }
 .pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-  padding: 7px 14px;
-  color: rgba(255,255,255,0.86);
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.14);
-  font-size: .9rem;
-  font-weight: 650;
-  letter-spacing: .01em;
+  display: inline;
+  color: rgba(255,255,255,0.78);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  font-size: .92rem;
+  font-weight: 700;
   box-shadow: none;
   cursor: default;
   pointer-events: none;
   user-select: none;
+}
+.pill + .pill::before {
+  content: " · ";
+  color: rgba(255,255,255,0.42);
+  padding: 0 9px;
 }
 .gallery {
   display: grid;

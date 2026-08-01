@@ -1,0 +1,3 @@
+Tato verze webu převádí tematické štítky v hlavičkách stránek na obyčejný textový řádek.
+Nejde o tlačítka ani o klikací tabs; vizuálně jsou bez rámečků a bez button stylu.
+Datum přípravy: 2026-08-01.

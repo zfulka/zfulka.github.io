@@ -1,3 +1,1 @@
-Tato verze webu obsahuje upravené neklikací štítky/tabs v hlavičkách tematických stránek.
-Štítky mají cursor: default a pointer-events: none, takže nepůsobí jako aktivní odkazy.
-Datum přípravy: 2026-08-01.
+Nahrazeno verzí TEXTOVE_STITKY: tematické štítky jsou nyní zobrazeny jako obyčejný textový řádek bez rámečků.
