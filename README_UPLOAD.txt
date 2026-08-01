@@ -25,3 +25,6 @@ Postup nahrání:
 2. Nahraj celý rozbalený obsah do kořene repozitáře zfulka.github.io.
 3. Commit changes.
 4. Otevři https://www.fulka.eu a dej Ctrl + F5.
+
+
+Update: topic chips in page headers were visually softened so they read as non-clickable labels rather than buttons.

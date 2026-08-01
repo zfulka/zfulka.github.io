@@ -44,8 +44,29 @@ a:hover { text-decoration: underline; }
 .kicker { color:#66d9e8; text-transform:uppercase; font-size:.78rem; font-weight:900; letter-spacing:.16em; margin-bottom:14px; }
 h1 { margin:0; max-width:900px; font-size:clamp(2.45rem,5vw,5.1rem); line-height:.98; letter-spacing:-.045em; }
 .subtitle { max-width:880px; margin:22px 0 0; color:rgba(255,255,255,.84); font-size:clamp(1.04rem,1.55vw,1.24rem); }
-.pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
-.pill { padding:8px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.08); color:#fff; font-weight:750; font-size:.88rem; }
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 7px 14px;
+  color: rgba(255,255,255,0.86);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  font-size: .9rem;
+  font-weight: 650;
+  letter-spacing: .01em;
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
+}
 .wrap { max-width:1160px; margin:-34px auto 0; padding:0 24px 56px; }
 .hero-card {
   background:var(--card);
