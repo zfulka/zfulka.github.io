@@ -1,26 +1,21 @@
-KOMPLETNÍ WEB – zfulka.github.io / www.fulka.eu
+KOMPLETNÍ WEB – LIGHT SERVICE-FIRST VERZE
 
-Obsah ZIPu nahraj do kořene GitHub repozitáře:
-zfulka / zfulka.github.io
+Tato verze je zjednodušená, vzdušnější a obchodně srozumitelná.
 
-Postup:
-1. ZIP rozbal lokálně v počítači.
-2. V GitHubu otevři repozitář zfulka.github.io.
-3. Použij Add file → Upload files.
-4. Nahraj celý rozbalený obsah včetně složky assets.
-5. Potvrď Commit changes.
+Struktura homepage:
+1. Úvod
+2. Nabízené služby / Services
+3. Odborné zázemí / Expertise
+4. Oprávnění a dokumenty / Credentials
+5. Kontakt / Contact
 
-Nově přidané stránky:
+Detailní texty služeb zůstávají na samostatných stránkách:
 - rozhodovaci-podpora-infrastruktury.html
 - infrastructure-decision-support.html
 
-Profilové fotky:
-- assets/profile.jpg
-- assets/profile-full.png
-
-Po nahrání otevři:
-https://www.fulka.eu
-
-Pokud se změny neprojeví hned:
-Ctrl + F5
-nebo přidej za adresu ?v=2
+Postup nahrání:
+1. ZIP rozbal.
+2. V GitHub repozitáři zfulka.github.io otevři Add file → Upload files.
+3. Nahraj celý rozbalený obsah včetně složky assets.
+4. Potvrď Commit changes.
+5. Otevři https://www.fulka.eu a proveď Ctrl + F5.
