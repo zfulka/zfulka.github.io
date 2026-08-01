@@ -1,29 +1,27 @@
-KOMPLETNÍ WEB – SALES-FIRST, JEDNODUCHÝ, PŮVODNÍ DESIGN
+KOMPLETNÍ WEB – SALES-FIRST + SPECIFICKÉ DETAILY SLUŽEB
 
-Cíl:
-- zachovat původní tmavý grafický styl,
-- zjednodušit orientaci,
-- orientovat homepage na prodej služeb,
-- monetizovat dosavadní zkušenosti jako seniorní externí expertizu.
+Úprava oproti předchozí verzi:
+- odkazy „Detail →“ jsou ponechány,
+- každý detail vede na vlastní relevantní stránku pouze k dané službě,
+- detail už nevede na obecnou stránku se všemi informacemi.
 
-Homepage struktura:
-1. Hero – premium technical advisory
-2. Services / Služby – 5 konzultačních balíčků
-3. R&D – podpora výzkumných projektů
-4. Why me / Proč externí specialista
-5. Expertise / Expertiza
-6. Credentials / Oprávnění
-7. Contact / Kontakt
-
-Detailní podstránky zůstávají:
-- infrastructure-decision-support.html
-- rozhodovaci-podpora-infrastruktury.html
+Nové detailní stránky:
+EN:
+- bridge-asset-check.html
+- carbon-construction-optimisation.html
+- bim-existing-documentation.html
+- digital-asset-decision-framework.html
 - rd-project-support.html
+
+CS:
+- mostni-objekty-sluzba.html
+- uhlikova-stavebni-optimalizace.html
+- bim-z-existujici-dokumentace.html
+- datovy-rozhodovaci-ramec.html
 - vyzkumne-projekty.html
 
 Postup nahrání:
 1. ZIP rozbal.
-2. V GitHub repozitáři zfulka.github.io otevři Add file → Upload files.
-3. Nahraj celý rozbalený obsah včetně složky assets.
-4. Potvrď Commit changes.
-5. Otevři https://www.fulka.eu a dej Ctrl + F5.
+2. Nahraj celý rozbalený obsah do kořene repozitáře zfulka.github.io.
+3. Commit changes.
+4. Otevři https://www.fulka.eu a dej Ctrl + F5.
