@@ -1,0 +1,1 @@
+Tato verze webu je černá / energy saver varianta. Výchozí režim je tmavý. Nahoře je přepínač Energy saver ON/OFF. OFF vrátí původní světlý design stránky pomocí localStorage. Datum přípravy: 2026-08-02.

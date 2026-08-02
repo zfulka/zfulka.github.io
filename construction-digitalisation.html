@@ -198,9 +198,32 @@ li { margin: 6px 0; }
   .hero-card img { height: 280px; }
   .nav { align-items: flex-start; flex-direction: column; }
 }
+
+
+/* Energy saver black variant with top toggle */
+.energy-toggle{position:fixed;top:72px;right:22px;z-index:99999;display:inline-flex;align-items:center;gap:9px;padding:7px 9px 7px 12px;border-radius:999px;background:rgba(3,6,10,.78);border:1px solid rgba(120,210,230,.24);color:rgba(230,240,248,.9);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:12px;line-height:1;font-weight:800;letter-spacing:.03em;box-shadow:0 12px 28px rgba(0,0,0,.36);backdrop-filter:blur(12px)}
+.energy-toggle button{appearance:none;border:0;border-radius:999px;padding:6px 10px;cursor:pointer;color:#041014;background:linear-gradient(135deg,#44d4e6,#87f0a4);font-weight:950;font-size:11px;letter-spacing:.04em}
+body.standard-mode .energy-toggle{background:rgba(255,255,255,.90);color:#243445;border-color:rgba(20,38,55,.12)}
+body.standard-mode .energy-toggle button{color:#fff;background:linear-gradient(135deg,#5b6673,#1e69c8)}
+body:not(.standard-mode){background:radial-gradient(circle at 12% 0%,rgba(46,123,215,.10),transparent 24%),radial-gradient(circle at 88% 4%,rgba(68,212,230,.08),transparent 22%),linear-gradient(180deg,#05070a 0%,#070b10 340px,#05070a 100%)!important;color:#dce7ef!important}
+body:not(.standard-mode) .topbar,body:not(.standard-mode) .top,body:not(.standard-mode) .hero{background:linear-gradient(120deg,rgba(2,5,9,.98),rgba(8,15,23,.96)),repeating-linear-gradient(112deg,rgba(255,255,255,.025) 0 1px,transparent 1px 18px)!important;border-color:rgba(255,255,255,.08)!important}
+body:not(.standard-mode) .brand,body:not(.standard-mode) .back,body:not(.standard-mode) .nav a,body:not(.standard-mode) h1,body:not(.standard-mode) h2,body:not(.standard-mode) h3,body:not(.standard-mode) h4,body:not(.standard-mode) strong{color:#f4f8fb!important}
+body:not(.standard-mode) .section,body:not(.standard-mode) .card,body:not(.standard-mode) .tile,body:not(.standard-mode) .hero-card,body:not(.standard-mode) .profile,body:not(.standard-mode) .profile-card,body:not(.standard-mode) .contact-lines,body:not(.standard-mode) .downloads,body:not(.standard-mode) aside,body:not(.standard-mode) figure{background:rgba(11,16,24,.94)!important;border-color:rgba(255,255,255,.10)!important;color:#dce7ef!important;box-shadow:0 18px 46px rgba(0,0,0,.42)!important}
+body:not(.standard-mode) p,body:not(.standard-mode) li,body:not(.standard-mode) .lead,body:not(.standard-mode) .subtitle,body:not(.standard-mode) .intro,body:not(.standard-mode) .note,body:not(.standard-mode) .meta,body:not(.standard-mode) .value-line,body:not(.standard-mode) .line,body:not(.standard-mode) figcaption{color:#b8c7d4!important}
+body:not(.standard-mode) a{color:#78d2e6!important}
+body:not(.standard-mode) .btn,body:not(.standard-mode) .more,body:not(.standard-mode) .badge,body:not(.standard-mode) .hero-tag{background:rgba(255,255,255,.06)!important;border-color:rgba(120,210,230,.20)!important;color:#e9f7fb!important;box-shadow:none!important}
+body:not(.standard-mode) .btn.primary,body:not(.standard-mode) .btn-primary,body:not(.standard-mode) .nav a.primary{background:linear-gradient(135deg,#ff6b2c,#b94216)!important;color:#fff!important;border-color:transparent!important}
+body:not(.standard-mode) .btn.light,body:not(.standard-mode) .btn-secondary{background:rgba(120,210,230,.09)!important;color:#e9f7fb!important}
+body:not(.standard-mode) .line,body:not(.standard-mode) hr{border-color:rgba(255,255,255,.10)!important}
+body:not(.standard-mode) img{filter:brightness(.88) contrast(1.02)}
+body:not(.standard-mode) .profile-photo img,body:not(.standard-mode) .profile-frame img{filter:brightness(.94) contrast(1.03)}
+body:not(.standard-mode) .kicker,body:not(.standard-mode) .mini{color:#66d9e8!important}
+@media(max-width:720px){.energy-toggle{top:auto;right:14px;bottom:14px;transform:none}}
+
 </style>
 </head>
 <body>
+<div class="energy-toggle" role="group" aria-label="Energy saver mode"><span>Energy saver</span><button type="button" id="energyToggle" aria-pressed="true">ON</button></div>
 <header class="top">
 <div class="top-inner">
 <div class="nav">
@@ -241,5 +264,10 @@ li { margin: 6px 0; }
 
 </main>
 <footer class="footer">© 2026 Zdeněk Fulka · topic page of the personal website.</footer>
+
+<script>
+(function(){var key="zf-energy-saver-mode";var btn=document.getElementById("energyToggle");if(!btn)return;function render(){var standard=localStorage.getItem(key)==="standard";document.body.classList.toggle("standard-mode",standard);btn.textContent=standard?"OFF":"ON";btn.setAttribute("aria-pressed",standard?"false":"true");btn.title=standard?"Switch Energy saver on":"Switch to original light design"}btn.addEventListener("click",function(){var standard=localStorage.getItem(key)==="standard";localStorage.setItem(key,standard?"energy":"standard");render()});render()})();
+</script>
+
 </body>
 </html>
