@@ -44,3 +44,17 @@ The local `assets/analytics.js` file tracks key clicks:
 - clicks to Toola.
 
 No personal names of visitors are collected.
+
+## Request form
+The site includes a no-local-email enquiry form:
+- EN: request.html
+- CS: poptavka.html
+
+The form posts to FormSubmit:
+https://formsubmit.co/fulka@outlook.cz
+
+First submission may require confirmation of the recipient email address. After confirmation, visitors can submit from the website without opening their local email account or email client.
+
+Tracked events:
+- Request Form Open
+- Request Form Submit
