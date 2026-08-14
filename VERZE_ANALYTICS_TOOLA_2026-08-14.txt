@@ -1,0 +1,2 @@
+Verze obsahuje Plausible-ready analytics, assets/analytics.js event tracking a Toola Ontology Lab stránky.
+Zapracované závěry: fulka.eu jako public landing page, Toola hostovaná samostatně, GitHub/Zenodo jako archiv, srozumitelná explikační vrstva pro vědeckou veřejnost.

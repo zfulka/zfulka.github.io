@@ -370,6 +370,11 @@ body:not(.standard-mode) .kicker,body:not(.standard-mode) .mini{color:#66d9e8!im
 @media(max-width:720px){.energy-toggle{top:auto;right:14px;bottom:14px;transform:none}}
 
 </style>
+
+<!-- Privacy-friendly analytics: activate by creating this domain in Plausible. -->
+<script defer data-domain="fulka.eu" src="https://plausible.io/js/script.js"></script>
+<script defer src="assets/analytics.js"></script>
+
 </head>
 <body>
 <div class="energy-toggle" role="group" aria-label="Energy saver mode"><span>Energy saver</span><button type="button" id="energyToggle" aria-pressed="true">ON</button></div>
@@ -379,6 +384,7 @@ body:not(.standard-mode) .kicker,body:not(.standard-mode) .mini{color:#66d9e8!im
     <nav class="nav" aria-label="Hlavní navigace">
       <a class="primary" href="#sluzby">Služby</a>
       <a href="#vyzkum">R&amp;D</a>
+      <a href="#toola">Toola Lab</a>
       <a href="#proc">Proč já</a>
       <a href="#opravneni">Oprávnění</a>
       <a href="#kontakt">Kontakt</a>
@@ -467,6 +473,28 @@ body:not(.standard-mode) .kicker,body:not(.standard-mode) .mini{color:#66d9e8!im
           <li>text k digitalizaci a rozhodovací podpoře,</li>
           <li>exploitation a uptake logika,</li>
           <li>guidelines, training a stakeholder materiály.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="toola">
+    <div class="section-head">
+      <div><div class="mini">Toola Lab</div><h2>Ontologie a analytics-ready exploitation page</h2></div>
+      <a class="btn light" href="toola-ontologie-lab.html">Otevřít Toola Lab</a>
+    </div>
+    <div class="split">
+      <div>
+        <p class="intro">Web nyní obsahuje samostatnou Toola landing vrstvu, která převádí závěry z diskuse o ontologii do veřejného negithubového vstupu: metoda, datové toky, mapa modulů, provenance a odkaz na živou aplikaci.</p>
+        <p>Součástí je také analytika kliků na živou Toola aplikaci, aby bylo možné měřit zájem o demonstrátor odděleně od obecné návštěvnosti webu.</p>
+      </div>
+      <div class="card">
+        <h3>Zapracované závěry</h3>
+        <ul>
+          <li>fulka.eu jako veřejná landing page,</li>
+          <li>Toola aplikace hostovaná samostatně a pouze odkazovaná,</li>
+          <li>GitHub/Zenodo vhodné pro kód a archiv, ne jako hlavní veřejné uživatelské prostředí,</li>
+          <li>srozumitelně vysvětlená metodika, dokumentace, provenance a příkladové výstupy.</li>
         </ul>
       </div>
     </div>
